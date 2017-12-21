@@ -1,91 +1,96 @@
 call plug#begin('~/.local/share/nvim/plugged')
+
+"nerdplugin
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'scrooloose/syntastic'
+Plug 'jistr/vim-nerdtree-tabs'
+
+" jump and easy edit
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
+
+" rainbow parentheses
 Plug 'junegunn/rainbow_parentheses.vim'
+
+" enhanced asterisk * 
+Plug 'haya14busa/vim-asterisk'
+
+" enhanced motion
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'godlygeek/tabular'
+
+" Completion
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/ncm-clang'
-Plug 'haya14busa/vim-asterisk'
-"Plug 'Shougo/neoinclude.vim'
-Plug 'vim-scripts/DoxygenToolkit.vim'
-"Plug 'NLKNguyen/c-syntax.vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'hdima/python-syntax'
+
+" Session Manager
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 "Plug 'w0rp/ale'
-"
+
+" colorscheme and airline
 Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-"Plug 'mhinz/vim-startify'
-
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'townk/vim-autoclose'
-Plug 'jiangmiao/auto-pairs'
-Plug 'Chiel92/vim-autoformat'
-"Plug 'gabrielelana/vim-markdown'
-"Plug 'w0ng/vim-hybrid'
-"Plug 'kristijanhusak/vim-hybrid-material'
-"Plug 'raimondi/delimitmate'
-"Plug 'crusoexia/vim-monokai'
 Plug 'dikiaap/minimalist'
+
+" fzf and ack, fuzzy finder
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'vim-scripts/bufexplorer.zip'
+
+" git plugin
 Plug 'tpope/vim-fugitive'
 
 
 
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
-Plug 'godlygeek/tabular'
-Plug 'rafi/awesome-vim-colorschemes'
 
-
-"Plug 'maralla/completor.vim'
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-"Plug 'ervandew/supertab'
-Plug 'jistr/vim-nerdtree-tabs'
+" TagBar F8
 Plug 'majutsushi/tagbar'
+
+
+" indent and format, auto pairs
+Plug 'jiangmiao/auto-pairs'
+Plug 'Chiel92/vim-autoformat'
 Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'joshdick/onedark.vim'
-"Plug 'ajmwagar/vim-deus'
-"Plug 'nvie/vim-flake8'
+
+" language plugin
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
-"Plug 'fatih/vim-go'
+" Python
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'hdima/python-syntax'
 
+" Cpp
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'vim-scripts/DoxygenToolkit.vim'
 
 
 
 call plug#end()
-set t_Co=256
-"set t_8f=^[[38;2;%lu;%lu;%lum
-"set t_8b=^[[48;2;%lu;%lu;%lum
 
-
-
-"　load plugins config
-"if filereadable(expand("~/.vimrcplugin"))
-"  source ~/.vimrcplugin
-"endif
 let g:ycm_python_binary_path = "/home/jing/miniconda3/envs/torch/bin/python3.6"
-"let g:python3_host_prog = '/path/to/python3'
+
+" true color and colorscheme UI and font
+set t_Co=256
+set guifont=DejaVu\ Sans\ Mono\ 12
+set termguicolors
+set background=dark
+colorscheme gruvbox
+
 " change leader key
 let mapleader = ','
 let g:mapleader = ','
 
-set guifont=DejaVu\ Sans\ Mono\ 12
 " 语法高亮
 syntax enable
+let python_highlight_all = 1
 " 自动补全
 filetype plugin indent on          
 set history=2000
@@ -93,30 +98,21 @@ set history=2000
 set autoread
 " 隐藏一些自动生成的文件
 set wildignore+=.o,*.bak,*.byte,*.native,*~,*.sw?,*.aux,*.toc,*.hg,*.git,*.svn,*.hi,*.so,*.a,*.pyc,*.aux,*.toc,*.exe
+
 " tabs and spaces
 set list
-
 set showbreak=↪\ 
 
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 
+
+" show statusline and tabline
 set laststatus=2 " Always display the statusline in all windows
 set showtabline=2 " Always display the tabline, even if there is only one tab
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 
-" 配色方案 
-set termguicolors
-set background=dark
-colorscheme gruvbox
-
-let python_highlight_all = 1
-
-"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"let g:solarized_visibility="high"
-"let g:solarized_diffmode="high"
 
 " 突出显示
 set cursorline
@@ -173,9 +169,9 @@ nnoremap <tab> %
 vnoremap <tab> %
             
 set wrap
-set textwidth=79
+set textwidth=80
 set formatoptions=qrn1
-set colorcolumn=79
+set colorcolumn=80
 " 取消方向键
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -205,7 +201,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " tab　switch
-
 map <leader>th :tabfirst<cr>
 map <leader>tl :tablast<cr>
 
@@ -216,29 +211,12 @@ noremap \ ,
 
 set autowrite
 
+" 命令 tab 显示模式, 此模式类似zsh
+set inccommand=nosplit
 
+" Vim-go
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
-"completor 
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-"set completeopt-=longest
-"set completeopt+=menuone
-"set completeopt-=menu
-"if &completeopt !~# 'noinsert\|noselect'
-"  set completeopt+=noselect
-"endif
-"
-"let g:completor_python_binary = '/usr/bin/python3.5'
-"
-"
-"nmap <leader>l :set list!<CR>
-"set listchars=tab:▸\ ,eol:¬
-"highlight NonText guifg=#4a4a59
-"highlight SpecialKey guifg=#4a4a59
-"let g:completor_clang_binary = '/usr/bin/clang'
-"
 
 
 ""Syntastic
@@ -259,7 +237,6 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 "
 " NERDTree
 "let g:nerdtree_tabs_open_on_console_startup = 1
-
 
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
      exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -283,26 +260,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " airline
 let g:airline_theme="gruvbox" 
-"let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1                                                    
-"let g:ycm_python_binary_path = '/home/jing/miniconda3/envs/tf/bin/python'
-"let g:ycm_server_keep_logfiles = 1
-"let g:ycm_server_log_level = 'debug'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
 
 
-" youcompleteme and snips
-
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-"let g:ycm_key_list_select_completion = ["<c-n>", "down", "<TAB>"]
-"let g:ycm_key_list_previous_completion = ["<c-p>", "up"]
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-"let g:ycm_autoclose_preview_window_after_completion = 0
-"let g:ycm_autoclose_preview_window_after_insertion = 1
-
-"let g:ycm_key_invoke_completion = '<TAB>'
 
 " tagbar width
 
@@ -313,7 +276,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 " parentheses color
 au VimEnter * RainbowParentheses
-
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 
@@ -326,9 +288,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 noremap <F3> :Autoformat<CR>
-"autocmd BufWritePost * call system("ctags -R")
 nnoremap <C-\> :CtrlPTag<cr>
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 "let g:ackprg = 'ag --nogroup --nocolor --column'
 "let g:indent_guides_enable_on_vim_startup = 1
@@ -368,6 +328,7 @@ map gz# <Plug>(asterisk-gz#)
 
 "let g:ale_python_pylint_executable = 'python3'   " or 'python' for Python 2
 
+" LanguageServer Plugin
 let g:LanguageClient_autoStart = 1
 
 let g:LanguageClient_serverCommands = {
@@ -381,7 +342,6 @@ nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
-set inccommand=nosplit
 
 
 " fzf and rg
