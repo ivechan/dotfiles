@@ -15,6 +15,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " enhanced asterisk * 
 Plug 'haya14busa/vim-asterisk'
 
+" select
+Plug 'terryma/vim-expand-region'
+
 " enhanced motion
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
@@ -87,8 +90,8 @@ set background=dark
 colorscheme gruvbox
 
 " change leader key
-let mapleader = ','
-let g:mapleader = ','
+let mapleader = ' '
+let g:mapleader = ' '
 
 " 语法高亮
 syntax enable
@@ -221,22 +224,6 @@ autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 
-""Syntastic
-"
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 1
-"let g:syntastic_quiet_messages = { "type": "style" }
-"let g:syntastic_python_checkers = ['flake8']
-"
-
-
-"
 " NERDTree
 "let g:nerdtree_tabs_open_on_console_startup = 1
 
@@ -304,12 +291,13 @@ nnoremap <Leader>l :BLines<Space><Enter>
 nnoremap <Leader>g :GFiles<Space><Enter>
 nnoremap <Leader>f :Files<Space><Enter>
 nnoremap <Leader>t :BTags<Space><Enter>
+nnoremap <Leader>b :Buffers<Space><Enter>
 nnoremap <C-p> :GFiles<Space><Enter>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+"nmap t <Plug>(easymotion-t2)
 "let g:asterisk#keeppos = 1
 "map *   <Plug>(asterisk-*)
 map #   <Plug>(asterisk-#)
@@ -378,10 +366,6 @@ let g:DoxygenToolkit_licenseTag="Copyright@Java306"
 
 " Session Plugin Config
 :let g:session_autosave = 'no'
-"nnoremap <leader>wso :OpenSession 
-"nnoremap <leader>wss :SaveSession 
-"nnoremap <leader>wsd :DeleteSession<CR>
-"nnoremap <leader>wsc :CloseSession<CR>
 
 set shortmess+=c
 set noshowmode
@@ -405,5 +389,7 @@ let g:jedi#goto_assignments_command = ""
 let g:jedi#usages_command = ""
 let g:jedi#rename_command = ""
 
-
+" expand select
+vmap K <Plug>(expand_region_expand)
+vmap J <Plug>(expand_region_shrink)
 
