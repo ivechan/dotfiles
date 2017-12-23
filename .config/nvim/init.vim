@@ -22,13 +22,13 @@ Plug 'godlygeek/tabular'
 
 " Completion
 Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/ncm-clang'
+"Plug 'roxma/ncm-clang'
 
 " Session Manager
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " colorscheme and airline
 Plug 'morhetz/gruvbox'
@@ -49,6 +49,7 @@ Plug 'tpope/vim-fugitive'
 
 
 
+Plug 'Shougo/echodoc.vim'
 
 " TagBar F8
 Plug 'majutsushi/tagbar'
@@ -67,6 +68,7 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'hdima/python-syntax'
 
+Plug 'davidhalter/jedi-vim'
 " Cpp
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-scripts/DoxygenToolkit.vim'
@@ -305,12 +307,6 @@ nnoremap <Leader>t :BTags<Space><Enter>
 nnoremap <C-p> :GFiles<Space><Enter>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"let g:airline#extensions#ale#enabled = 1
-
-"nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-"nmap <silent> <C-j> <Plug>(ale_next_wrap)
-"let g:ale_set_loclist = 0
-"let g:ale_set_quickfix = 1
 
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
@@ -331,18 +327,22 @@ map gz# <Plug>(asterisk-gz#)
 " LanguageServer Plugin
 let g:LanguageClient_autoStart = 1
 
+"\ 'python': ['pyls'],
 let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls'],
     \ 'cpp': ['~/.local/stow/cquery/bin/cquery', '--language-server'],
     \ }
+
+
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = '/home/jing/.config/nvim/settings.json'
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
-
+"let g:cm_sources_override = {
+"    \ 'cm-jedi': {'enable':1}
+"    \ }
 
 " fzf and rg
 command! -bang -nargs=* Rg
@@ -373,7 +373,7 @@ nnoremap <Leader>a :Ack!<Space>
 " Doxygen
 let g:DoxygenToolkit_authorName="Jing" 
 let g:DoxygenToolkit_licenseTag="Copyright@Java306"
-nnoremap <leader>d :Dox<cr>
+"nnoremap <leader>d :Dox<cr>
 
 
 " Session Plugin Config
@@ -382,4 +382,28 @@ nnoremap <leader>d :Dox<cr>
 "nnoremap <leader>wss :SaveSession 
 "nnoremap <leader>wsd :DeleteSession<CR>
 "nnoremap <leader>wsc :CloseSession<CR>
+
+set shortmess+=c
+set noshowmode
+
+" ale
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '✖'
+let g:ale_linters = {'python': ['pylint']} 
+nmap <silent> <a-k> <Plug>(ale_previous_wrap)
+nmap <silent> <a-j> <Plug>(ale_next_wrap)
+
+let g:ale_lint_on_text_changed = 'never'
+let g:cm_sources_override = {
+    \ 'cm-jedi': {'enable':1}
+    \ }
+
+" jedi 仅仅作为跳转, 不负责自动完成
+let g:jedi#completions_enabled = 0
+let g:jedi#goto_assignments_command = ""
+let g:jedi#usages_command = ""
+let g:jedi#rename_command = ""
+
+
 
