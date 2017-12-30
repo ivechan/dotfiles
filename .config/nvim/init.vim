@@ -133,6 +133,7 @@ set nocompatible
 set modelines=0
 
 set tabstop=2
+set smarttab
 "　缩进宽度和退格
 set shiftwidth=2
 set softtabstop=2
@@ -158,8 +159,8 @@ set laststatus=2
 set number
 set undofile
 "　正则
-nnoremap / /\v
-vnoremap / /\v
+"nnoremap / /\v
+"vnoremap / /\v
 " 大小写
 set ignorecase 
 set smartcase
@@ -252,7 +253,7 @@ let g:airline_theme="gruvbox"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 
 
 
@@ -277,14 +278,10 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 noremap <F3> :Autoformat<CR>
-nnoremap <C-\> :CtrlPTag<cr>
 
 "let g:ackprg = 'ag --nogroup --nocolor --column'
 "let g:indent_guides_enable_on_vim_startup = 1
 
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep'
-endif
 
 nnoremap <Leader>a :Ag<Space><Enter>
 nnoremap <Leader>l :BLines<Space><Enter>
@@ -298,8 +295,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nmap s <Plug>(easymotion-s2)
 "nmap t <Plug>(easymotion-t2)
-"let g:asterisk#keeppos = 1
-"map *   <Plug>(asterisk-*)
+let g:asterisk#keeppos = 1
+map *   <Plug>(asterisk-z*)
 map #   <Plug>(asterisk-#)
 map g*  <Plug>(asterisk-g*)
 map g#  <Plug>(asterisk-g#)
@@ -324,29 +321,13 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = '/home/jing/.config/nvim/settings.json'
 
-"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "let g:cm_sources_override = {
 "    \ 'cm-jedi': {'enable':1}
 "    \ }
 
-" fzf and rg
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-
-let g:rg_command = '
-  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
-  \ -g "!{.git,node_modules,vendor}/*" '
-
-command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+" fzf and ag
+let g:fzf_buffers_jump = 1
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
