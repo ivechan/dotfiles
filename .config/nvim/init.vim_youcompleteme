@@ -15,29 +15,32 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " enhanced asterisk * 
 Plug 'haya14busa/vim-asterisk'
 
-" enhanced motion
+" repeat for vim-surround
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
-Plug 'godlygeek/tabular'
+" enhanced motion
+"Plug 'tpope/vim-unimpaired'
+"Plug 'godlygeek/tabular'
 
 " Completion
 "Plug 'roxma/nvim-completion-manager'
 "Plug 'roxma/ncm-clang'
 Plug 'valloric/youcompleteme'
 
+" synatic check engine
+Plug 'w0rp/ale'
 
 " Session Manager
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-Plug 'w0rp/ale'
+
 
 " colorscheme and airline
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'dikiaap/minimalist'
+" Plug 'dikiaap/minimalist'
 
 " fzf and ack, fuzzy finder
 Plug 'mileszs/ack.vim'
@@ -51,7 +54,7 @@ Plug 'tpope/vim-fugitive'
 
 
 
-Plug 'Shougo/echodoc.vim'
+"Plug 'Shougo/echodoc.vim'
 
 " TagBar F8
 Plug 'majutsushi/tagbar'
@@ -59,8 +62,9 @@ Plug 'majutsushi/tagbar'
 
 " indent and format, auto pairs
 Plug 'jiangmiao/auto-pairs'
-Plug 'Chiel92/vim-autoformat'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'Chiel92/vim-autoformat'
+" indent visualization
+"Plug 'nathanaelkane/vim-indent-guides'
 
 " language plugin
 "Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
