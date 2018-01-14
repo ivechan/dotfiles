@@ -127,14 +127,14 @@ set cursorline
 " Hide the mouse cursor while typing
 " set mousehide
 
-set nocompatible
+" No need for current version vim
+" set nocompatible 
 set modelines=0
 
-set tabstop=2
-set smarttab
+set tabstop=8
 "　缩进宽度和退格
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 " 编码格式
 set encoding=utf-8
@@ -293,8 +293,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 let g:asterisk#keeppos = 1
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+nnoremap s <Plug>(easymotion-s2)
+nnoremap t <Plug>(easymotion-t2)
 "map *   <Plug>(asterisk-*)
 map #   <Plug>(asterisk-z#)
 map g*  <Plug>(asterisk-g*)
@@ -374,14 +374,11 @@ let g:ale_lint_on_text_changed = 'never'
 
 
 
-"let g:ycm_seed_identifiers_with_syntax = 1
 
+" ycm settting
 let g:ycm_key_invoke_completion = '<C-e>'
-"set completeopt-=preview
-
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-
-
-
 "let g:ycm_python_binary_path = "/home/jing/miniconda3/envs/torch/bin/python3.6m"
+
+nnoremap <leader>jd :YcmCompleter GoTo<CR> 
