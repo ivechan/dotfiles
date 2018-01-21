@@ -1,3 +1,9 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 "nerdplugin
@@ -15,44 +21,46 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " enhanced asterisk * 
 Plug 'haya14busa/vim-asterisk'
 
-" select
-Plug 'terryma/vim-expand-region'
-
-" enhanced motion
+" repeat for vim-surround
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
-Plug 'godlygeek/tabular'
+" enhanced motion
+"Plug 'tpope/vim-unimpaired'
+"Plug 'godlygeek/tabular'
 
 " Completion
-Plug 'roxma/nvim-completion-manager'
+"Plug 'roxma/nvim-completion-manager'
 "Plug 'roxma/ncm-clang'
+Plug 'valloric/youcompleteme'
+
+" synatic check engine
+Plug 'w0rp/ale'
 
 " Session Manager
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-Plug 'w0rp/ale'
+
 
 " colorscheme and airline
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'dikiaap/minimalist'
+" Plug 'dikiaap/minimalist'
 
 " fzf and ack, fuzzy finder
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'vim-scripts/bufexplorer.zip'
+"Plug 'vim-scripts/bufexplorer.zip'
 
 " git plugin
 Plug 'tpope/vim-fugitive'
 
 
 
-Plug 'Shougo/echodoc.vim'
+"Plug 'Shougo/echodoc.vim'
 
 " TagBar F8
 Plug 'majutsushi/tagbar'
@@ -60,18 +68,20 @@ Plug 'majutsushi/tagbar'
 
 " indent and format, auto pairs
 Plug 'jiangmiao/auto-pairs'
-Plug 'Chiel92/vim-autoformat'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'Chiel92/vim-autoformat'
+" indent visualization
+"Plug 'nathanaelkane/vim-indent-guides'
 
 " language plugin
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'rust-lang/rust.vim'
 
 " Python
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'hdima/python-syntax'
 
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 " Cpp
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-scripts/DoxygenToolkit.vim'
@@ -80,11 +90,11 @@ Plug 'vim-scripts/DoxygenToolkit.vim'
 
 call plug#end()
 
-let g:ycm_python_binary_path = "/home/jing/miniconda3/envs/torch/bin/python3.6"
 
 " true color and colorscheme UI and font
-set t_Co=256
-set guifont=DejaVu\ Sans\ Mono\ 12
+"set t_Co=256
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 set background=dark
 colorscheme gruvbox
@@ -105,10 +115,10 @@ set autoread
 set wildignore+=.o,*.bak,*.byte,*.native,*~,*.sw?,*.aux,*.toc,*.hg,*.git,*.svn,*.hi,*.so,*.a,*.pyc,*.aux,*.toc,*.exe
 
 " tabs and spaces
-set list
-set showbreak=↪\ 
+"set list
+"set showbreak=↪\ 
 
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+"set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 
 
@@ -129,54 +139,73 @@ set cursorline
 " Hide the mouse cursor while typing
 " set mousehide
 
-set nocompatible
+" No need for current version vim
+" set nocompatible 
+" 避免某个安全漏洞
 set modelines=0
 
-set tabstop=2
-set smarttab
-"　缩进宽度和退格
-set shiftwidth=2
-set softtabstop=2
+"　缩进宽度和退格,跟其他编辑器的设置有区别，一般不要更改
+set tabstop=8
+set shiftwidth=4
+set softtabstop=4
 set expandtab
+
 " 编码格式
 set encoding=utf-8
+
+" 至少保留在屏幕的行数
 set scrolloff=3
-" 自动锁紧
+
+" 自动缩进
 set autoindent
+
 "　显示命输入令和模式
 set showmode
 set showcmd
 set hidden
+
+" 在命令行上面显示候选项
 set wildmenu
-"set wildmode=list:longest
 set wildmode=full
 set visualbell
 set ttyfast
+
+" 在右下角显示当前光标所在位置（行列）
 set ruler
-set backspace=indent,eol,start
 set laststatus=2
 "set relativenumber
+" 显示绝对行数
 set number
 set undofile
+set undodir=~/.config/nvim/.undodir
+
 "　正则
 "nnoremap / /\v
 "vnoremap / /\v
 " 大小写
 set ignorecase 
 set smartcase
+
+" 在substitute命令的时候，默认执行整行内的匹配项而不是一个
 set gdefault
+
+" 在执行搜索/命令的时候，及时显示到那里
 set incsearch
 "　括号匹配
-set showmatch
+" set showmatch
+
 " 高亮显示搜索
 set hlsearch
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
-            
+"nnoremap <leader>noh :noh<cr>
+
+" 在Normal模式下用Tab实现%的匹配作用，但是想不起来用，所以注释
+" nnoremap <tab> %
+" vnoremap <tab> %
+
+" 类似其他编辑器的自动换行功能
 set wrap
 set textwidth=80
-set formatoptions=qrn1
+" set formatoptions=qrn1
 set colorcolumn=80
 " 取消方向键
 nnoremap <up> <nop>
@@ -195,38 +224,44 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 
-"nnoremap ; :
-au FocusLost * :wa
+" nnoremap ; :
+" au FocusLost * :wa
 " jj 替代　ＥＳＣ
 inoremap jj <ESC>
+
+" 快捷键分屏
 nnoremap <leader>w <C-w>v<C-w>l
-"　分屏宽口移动
+
+"　更简单的分屏宽口移动
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " tab　switch
-map <leader>th :tabfirst<cr>
-map <leader>tl :tablast<cr>
+" map <leader>th :tabfirst<cr>
+" map <leader>tl :tablast<cr>
 
 " 新建tab  Ctrl+t
 nnoremap <C-t>     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
-noremap \ ,
 
-set autowrite
+" set autowrite
+set shortmess+=c
+set noshowmode
 
-" 命令 tab 显示模式, 此模式类似zsh
-set inccommand=nosplit
+" neovim feature，让substitute命令即使显示
+if has('nvim')
+  set inccommand=nosplit
+endif
 
 " Vim-go
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
+autocmd FileType rust nmap <leader>r  :RustRun<CR>
 
-" NERDTree
-"let g:nerdtree_tabs_open_on_console_startup = 1
+" NERDTree setting
 
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
      exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -255,14 +290,13 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 "let g:airline_powerline_fonts = 1
 
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 
 " tagbar width
 
 let g:tagbar_width=30
-map <F8> :TagbarToggle<CR>
-
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " parentheses color
 au VimEnter * RainbowParentheses
@@ -277,12 +311,10 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-noremap <F3> :Autoformat<CR>
-
-"let g:ackprg = 'ag --nogroup --nocolor --column'
-"let g:indent_guides_enable_on_vim_startup = 1
+" noremap <F3> :Autoformat<CR>
 
 
+" fzf shortcut
 nnoremap <Leader>a :Ag<Space><Enter>
 nnoremap <Leader>l :BLines<Space><Enter>
 nnoremap <Leader>g :GFiles<Space><Enter>
@@ -293,47 +325,48 @@ nnoremap <C-p> :GFiles<Space><Enter>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-nmap s <Plug>(easymotion-s2)
-"nmap t <Plug>(easymotion-t2)
+
+" asterisk setting
 let g:asterisk#keeppos = 1
-map *   <Plug>(asterisk-z*)
-map #   <Plug>(asterisk-#)
+nnoremap s <Plug>(easymotion-s2)
+nnoremap t <Plug>(easymotion-t2)
+"map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-z#)
 map g*  <Plug>(asterisk-g*)
 map g#  <Plug>(asterisk-g#)
-map z*  <Plug>(asterisk-z*)
+map *  <Plug>(asterisk-z*)
 map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 
-"let g:ale_python_flake8_executable = 'python3'   " or 'python' for Python 2
-
-"let g:ale_python_pylint_executable = 'python3'   " or 'python' for Python 2
 
 " LanguageServer Plugin
-let g:LanguageClient_autoStart = 1
+"let g:LanguageClient_autoStart = 1
 
 "\ 'python': ['pyls'],
-let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['~/.local/stow/cquery/bin/cquery', '--language-server'],
-    \ }
+"let g:LanguageClient_serverCommands = {
+    "\ 'cpp': ['~/.local/stow/cquery/bin/cquery', '--language-server'],
+    "\ }
 
 
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = '/home/jing/.config/nvim/settings.json'
+"let g:LanguageClient_loadSettings = 1
+"let g:LanguageClient_settingsPath = '/home/jing/.config/nvim/settings.json'
 
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "let g:cm_sources_override = {
 "    \ 'cm-jedi': {'enable':1}
 "    \ }
 
-" fzf and ag
+" fzf and rg
+" " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
-
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-" Ack
 "
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
@@ -347,9 +380,11 @@ let g:DoxygenToolkit_licenseTag="Copyright@Java306"
 
 " Session Plugin Config
 :let g:session_autosave = 'no'
+"nnoremap <leader>wso :OpenSession 
+"nnoremap <leader>wss :SaveSession 
+"nnoremap <leader>wsd :DeleteSession<CR>
+"nnoremap <leader>wsc :CloseSession<CR>
 
-set shortmess+=c
-set noshowmode
 
 " ale
 let g:airline#extensions#ale#enabled = 1
@@ -360,17 +395,23 @@ nmap <silent> <a-k> <Plug>(ale_previous_wrap)
 nmap <silent> <a-j> <Plug>(ale_next_wrap)
 
 let g:ale_lint_on_text_changed = 'never'
-let g:cm_sources_override = {
-    \ 'cm-jedi': {'enable':1}
-    \ }
+"let g:cm_sources_override = {
+"    \ 'cm-jedi': {'enable':1}
+"    \ }
 
 " jedi 仅仅作为跳转, 不负责自动完成
-let g:jedi#completions_enabled = 0
-let g:jedi#goto_assignments_command = ""
-let g:jedi#usages_command = ""
-let g:jedi#rename_command = ""
+"let g:jedi#completions_enabled = 0
+"let g:jedi#goto_assignments_command = ""
+"let g:jedi#usages_command = ""
+"let g:jedi#rename_command = ""
 
-" expand select
-vmap K <Plug>(expand_region_expand)
-vmap J <Plug>(expand_region_shrink)
 
+
+
+" ycm settting
+let g:ycm_key_invoke_completion = '<C-e>'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+let g:ycm_python_binary_path = "/home/jing/.pyenv/versions/py3/bin/python3"
+
+nnoremap <leader>jd :YcmCompleter GoTo<CR> 
