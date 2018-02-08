@@ -75,12 +75,13 @@ Plug 'jiangmiao/auto-pairs'
 " language plugin
 "Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'rust-lang/rust.vim'
 
 " Python
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'hdima/python-syntax'
 
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 " Cpp
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-scripts/DoxygenToolkit.vim'
@@ -91,8 +92,9 @@ call plug#end()
 
 
 " true color and colorscheme UI and font
-set t_Co=256
-set guifont=DejaVu\ Sans\ Mono\ 12
+"set t_Co=256
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 set background=dark
 colorscheme gruvbox
@@ -257,6 +259,7 @@ endif
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
+autocmd FileType rust nmap <leader>r  :RustRun<CR>
 
 " NERDTree setting
 
@@ -409,6 +412,6 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ycm_key_invoke_completion = '<C-e>'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-"let g:ycm_python_binary_path = "/home/jing/miniconda3/envs/torch/bin/python3.6m"
+let g:ycm_python_binary_path = "/home/jing/.pyenv/versions/py3/bin/python3"
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR> 
