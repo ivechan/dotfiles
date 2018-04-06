@@ -58,6 +58,8 @@ Plug 'junegunn/fzf.vim'
 " git plugin
 Plug 'tpope/vim-fugitive'
 
+" smart input method plugin
+Plug 'lilydjwg/fcitx.vim'
 
 
 "Plug 'Shougo/echodoc.vim'
@@ -389,8 +391,15 @@ let g:DoxygenToolkit_licenseTag="Copyright@Java306"
 " ale
 let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_warning = '⚠'
+let g:ycm_warning_symbol = '⚠'
 let g:ale_sign_error = '✖'
-let g:ale_linters = {'python': ['pylint']} 
+let g:ycm_error_symbol = '✖'
+
+highlight YcmErrorLine guibg=#3f0000
+
+
+
+let g:ale_linters = {'python': ['pylint'], 'cpp':[]} 
 nmap <silent> <a-k> <Plug>(ale_previous_wrap)
 nmap <silent> <a-j> <Plug>(ale_next_wrap)
 
@@ -412,6 +421,11 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ycm_key_invoke_completion = '<C-e>'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-let g:ycm_python_binary_path = "/home/jing/.pyenv/versions/py3/bin/python3"
+"let g:ycm_python_binary_path = "/home/jing/.pyenv/versions/py3/bin/python3"
+let g:ycm_python_binary_path = 'python'
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR> 
+nnoremap <leader>dg :YcmDiags<CR> 
+
+
+"fcitx
