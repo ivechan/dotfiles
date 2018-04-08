@@ -15,6 +15,8 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 
+" argument text-object support
+Plug 'gaving/vim-textobj-argument'
 " rainbow parentheses
 Plug 'junegunn/rainbow_parentheses.vim'
 
