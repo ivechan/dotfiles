@@ -80,8 +80,8 @@ Plug 'jiangmiao/auto-pairs'
 
 " language plugin
 "Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'rust-lang/rust.vim'
+"Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"Plug 'rust-lang/rust.vim'
 
 " Python
 Plug 'hynek/vim-python-pep8-indent'
@@ -90,7 +90,7 @@ Plug 'hdima/python-syntax'
 "Plug 'davidhalter/jedi-vim'
 " Cpp
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'vim-scripts/DoxygenToolkit.vim'
+"Plug 'vim-scripts/DoxygenToolkit.vim'
 
 
 
