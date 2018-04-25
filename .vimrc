@@ -30,8 +30,6 @@ Plug 'tpope/vim-repeat'
 "Plug 'godlygeek/tabular'
 
 " Completion
-"Plug 'roxma/nvim-completion-manager'
-"Plug 'roxma/ncm-clang'
 Plug 'valloric/youcompleteme'
 
 " synatic check engine
@@ -52,22 +50,26 @@ Plug 'vim-airline/vim-airline-themes'
 
 " fzf and ack, fuzzy finder
 Plug 'mileszs/ack.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+
+Plug 'Yggdroot/LeaderF'
 
 "Plug 'vim-scripts/bufexplorer.zip'
 
 " git plugin
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+
 
 " smart input method plugin
 Plug 'lilydjwg/fcitx.vim'
 
 
-"Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/echodoc.vim'
 
-" TagBar F8
-Plug 'majutsushi/tagbar'
+" about Tags
+"Plug 'majutsushi/tagbar'
 
 Plug 'ludovicchabant/vim-gutentags'
 
@@ -95,6 +97,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 
 
 call plug#end()
+
 
 
 " true color and colorscheme UI and font
@@ -148,7 +151,7 @@ set cursorline
 " No need for current version vim
 " set nocompatible 
 " 避免某个安全漏洞
-set modelines=0
+"set modelines=0
 
 "　缩进宽度和退格,跟其他编辑器的设置有区别，一般不要更改
 set tabstop=8
@@ -165,10 +168,6 @@ set scrolloff=3
 " 自动缩进
 set autoindent
 
-"　显示命输入令和模式
-set showmode
-set showcmd
-set hidden
 
 " 在命令行上面显示候选项
 set wildmenu
@@ -254,7 +253,6 @@ inoremap <C-t>     <Esc>:tabnew<CR>
 
 " set autowrite
 set shortmess+=c
-set noshowmode
 
 " neovim feature，让substitute命令即使显示
 if has('nvim')
@@ -299,11 +297,6 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 
-" tagbar width
-
-let g:tagbar_width=30
-nnoremap <F8> :TagbarToggle<CR>
-
 " parentheses color
 au VimEnter * RainbowParentheses
 let g:rainbow#max_level = 16
@@ -311,23 +304,20 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 
 " List of colors that you do not want. ANSI code or #RRGGBB
 let g:rainbow#blacklist = [233, 234]
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|png|jpg|)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
 
 " noremap <F3> :Autoformat<CR>
 
 
 " fzf shortcut
-nnoremap <Leader>a :Ag<Space><Enter>
-nnoremap <Leader>l :BLines<Space><Enter>
-nnoremap <Leader>g :GFiles<Space><Enter>
-nnoremap <Leader>f :Files<Space><Enter>
-nnoremap <Leader>t :BTags<Space><Enter>
-nnoremap <Leader>b :Buffers<Space><Enter>
-nnoremap <C-p> :GFiles<Space><Enter>
+"nnoremap <Leader>a :Ag<Space><Enter>
+"nnoremap <Leader>l :BLines<Space><Enter>
+"nnoremap <Leader>g :GFiles<Space><Enter>
+""nnoremap <Leader>f :Files<Space><Enter>
+"nnoremap <Leader>t :BTags<Space><Enter>
+"nnoremap <Leader>b :Buffers<Space><Enter>
+"nnoremap <C-p> :GFiles<Space><Enter>
+"nnoremap <C-p> :LeaderfFunction<Enter>
+nnoremap <a-m> :LeaderfMru<Enter>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -366,9 +356,7 @@ map gz# <Plug>(asterisk-gz#)
 "    \ 'cm-jedi': {'enable':1}
 "    \ }
 
-" fzf and rg
-" " [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
+" ag
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
@@ -379,8 +367,8 @@ nnoremap <Leader>a :Ack!<Space>
 
 
 " Doxygen
-let g:DoxygenToolkit_authorName="Jing" 
-let g:DoxygenToolkit_licenseTag="Copyright@Java306"
+"let g:DoxygenToolkit_authorName="Jing" 
+"let g:DoxygenToolkit_licenseTag="Copyright@Java306"
 "nnoremap <leader>d :Dox<cr>
 
 
@@ -398,42 +386,47 @@ let g:ale_sign_warning = '⚠'
 let g:ycm_warning_symbol = '⚠'
 let g:ale_sign_error = '✖'
 let g:ycm_error_symbol = '✖'
+"let g:ale_sign_error = '>>'
+"let g:ale_sign_warning = '--'
 
-highlight YcmErrorLine guibg=#3f0000
 
 
 
-let g:ale_linters = {'python': ['pylint'], 'cpp':[]} 
+let g:ale_linters = {'python': ['pylint'], 'cpp':['clang', 'gcc']} 
 nmap <silent> <a-k> <Plug>(ale_previous_wrap)
 nmap <silent> <a-j> <Plug>(ale_next_wrap)
 
 let g:ale_lint_on_text_changed = 'never'
-"let g:cm_sources_override = {
-"    \ 'cm-jedi': {'enable':1}
-"    \ }
-
-" jedi 仅仅作为跳转, 不负责自动完成
-"let g:jedi#completions_enabled = 0
-"let g:jedi#goto_assignments_command = ""
-"let g:jedi#usages_command = ""
-"let g:jedi#rename_command = ""
-
-
+let g:ale_lint = 1
 
 
 " ycm settting
 let g:ycm_key_invoke_completion = '<C-e>'
-let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+" 在错误行高亮显示
+highlight YcmErrorLine guibg=#3f0000
 
-"let g:ycm_python_binary_path = "/home/jing/.pyenv/versions/py3/bin/python3"
+" 不使用preview
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+set completeopt=menu,menuone
+
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_strings=1
+
 let g:ycm_python_binary_path = 'python'
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR> 
-nnoremap <leader>dg :YcmDiags<CR> 
+"nnoremap <leader>dg :YcmDiags<CR> 
 
 
 "fcitx
+
+" tags setting
 "
+
+"tag文件设置为.tag, 不会污染
 set tags=./.tags;,.tags
 
 
@@ -456,4 +449,12 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
+
+
+
+" echodoc setting
+set noshowmode
+"set cmdheight=1
+" 自动启动echodoc
+let g:echodoc#enable_at_startup=1
 
