@@ -11,6 +11,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jistr/vim-nerdtree-tabs'
 
+Plug 'skywind3000/asyncrun.vim'
+
 " jump and easy edit
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
@@ -259,11 +261,25 @@ if has('nvim')
   set inccommand=nosplit
 endif
 
-" Vim-go
+" build command
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 autocmd FileType rust nmap <leader>r  :RustRun<CR>
+
+autocmd FileType cpp nmap <leader>b :AsyncRun ninja -C ./build<CR>
+autocmd FileType cpp nmap <leader>r :AsyncRun ./build/demo<CR>
+
+" automatically open quickfix window when AsyncRun command is executed
+" set the quickfix window 6 lines height.
+let g:asyncrun_open = 6
+
+" ring the bell to notify you job finished
+let g:asyncrun_bell = 1
+
+" F10 to toggle quickfix window
+nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+
 
 " NERDTree setting
 
@@ -316,8 +332,9 @@ let g:rainbow#blacklist = [233, 234]
 "nnoremap <Leader>t :BTags<Space><Enter>
 "nnoremap <Leader>b :Buffers<Space><Enter>
 "nnoremap <C-p> :GFiles<Space><Enter>
-"nnoremap <C-p> :LeaderfFunction<Enter>
+nnoremap <C-p> :LeaderfFunction<Enter>
 nnoremap <a-m> :LeaderfMru<Enter>
+nnoremap <a-b> :LeaderfBuffer<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
