@@ -335,6 +335,7 @@ let g:rainbow#blacklist = [233, 234]
 nnoremap <C-p> :LeaderfFunction<Enter>
 nnoremap <a-m> :LeaderfMru<Enter>
 nnoremap <a-b> :LeaderfBuffer<CR>
+nnoremap <Leader>l :LeaderfLineCword<Enter>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -467,6 +468,7 @@ if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
 
+set guioptions=0
 
 
 " echodoc setting
