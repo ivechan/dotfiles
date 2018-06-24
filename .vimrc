@@ -1,10 +1,5 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/vim/plugged')
 
 "nerdplugin
 Plug 'scrooloose/nerdtree'
@@ -65,7 +60,7 @@ Plug 'mhinz/vim-signify'
 
 
 " smart input method plugin
-Plug 'lilydjwg/fcitx.vim'
+"Plug 'lilydjwg/fcitx.vim'
 
 
 Plug 'Shougo/echodoc.vim'
@@ -74,7 +69,7 @@ Plug 'Shougo/echodoc.vim'
 "Plug 'majutsushi/tagbar'
 
 Plug 'ludovicchabant/vim-gutentags'
-
+Plug 'skywind3000/gutentags_plus'
 
 " indent and format, auto pairs
 Plug 'jiangmiao/auto-pairs'
@@ -109,6 +104,9 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 set background=dark
 colorscheme gruvbox
+set nocompatible
+
+
 
 " change leader key
 let mapleader = ' '
@@ -130,6 +128,7 @@ set wildignore+=.o,*.bak,*.byte,*.native,*~,*.sw?,*.aux,*.toc,*.hg,*.git,*.svn,*
 "set showbreak=↪\ 
 
 "set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+
 
 
 
@@ -445,28 +444,45 @@ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 "
 
 "tag文件设置为.tag, 不会污染
-set tags=./.tags;,.tags
+"set tags=./.tags;,.tags
 
 
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
 
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
 let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
+let g:gutentags_cache_dir = expand('~/.cache/tags')
 
-" 配置 ctags 的参数
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+" 禁止插件自动加载gtags数据库，用plus插件来控制
+let g:gutentags_auto_add_gtags_cscope = 0
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
 
 " 检测 ~/.cache/tags 不存在就新建
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
+
+" gtags 配置
+" https://www.gnu.org/software/global/
+let $GTAGSLABEL = 'native-pygments'
+" sharem目录下
+let $GTAGSCONF = 'C:\\Users\\jing\\gtags.conf' "必须重新配置
+
+" 配置 ctags 的参数
+" https://github.com/universal-ctags/ctags
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+
+
+
+
 
 set guioptions=0
 
@@ -476,4 +492,5 @@ set noshowmode
 "set cmdheight=1
 " 自动启动echodoc
 let g:echodoc#enable_at_startup=1
-
+set guifont=Fira\ Code:h12
+set backspace=indent,eol,start
