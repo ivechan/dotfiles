@@ -1,10 +1,9 @@
-
 call plug#begin('~/vim/plugged')
 
 "nerdplugin
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' }
+
 
 Plug 'skywind3000/asyncrun.vim'
 
@@ -21,9 +20,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'haya14busa/vim-asterisk'
 
 " repeat for vim-surround
-Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat', 
 " enhanced motion
-"Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 "Plug 'godlygeek/tabular'
 
 " Completion
@@ -46,7 +45,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'dikiaap/minimalist'
 
 " fzf and ack, fuzzy finder
-Plug 'mileszs/ack.vim'
+"Plug 'mileszs/ack.vim'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 
@@ -68,8 +67,10 @@ Plug 'Shougo/echodoc.vim'
 " about Tags
 "Plug 'majutsushi/tagbar'
 
+Plug 'vim-scripts/gtags.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
+Plug 'skywind3000/vim-preview'
 
 " indent and format, auto pairs
 Plug 'jiangmiao/auto-pairs'
@@ -83,18 +84,17 @@ Plug 'jiangmiao/auto-pairs'
 "Plug 'rust-lang/rust.vim'
 
 " Python
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'hdima/python-syntax'
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+Plug 'hdima/python-syntax', {'for': 'python'}
 
 "Plug 'davidhalter/jedi-vim'
 " Cpp
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 "Plug 'vim-scripts/DoxygenToolkit.vim'
 
 
 
 call plug#end()
-
 
 
 " true color and colorscheme UI and font
@@ -249,8 +249,8 @@ nnoremap <C-l> <C-w>l
 " map <leader>tl :tablast<cr>
 
 " 新建tab  Ctrl+t
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
+"nnoremap <C-t>     :tabnew<CR>
+"inoremap <C-t>     <Esc>:tabnew<CR>
 
 " set autowrite
 set shortmess+=c
@@ -309,7 +309,7 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 "let g:airline_powerline_fonts = 1
 
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <F8> :NERDTreeToggle<CR>
 
 
 " parentheses color
@@ -399,8 +399,8 @@ nnoremap <Leader>a :Ack!<Space>
 
 " ale
 let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_warning = '⚠'
-let g:ycm_warning_symbol = '⚠'
+"let g:ale_sign_warning = '⚠'
+"let g:ycm_warning_symbol = '⚠'
 let g:ale_sign_error = '✖'
 let g:ycm_error_symbol = '✖'
 "let g:ale_sign_error = '>>'
@@ -409,7 +409,7 @@ let g:ycm_error_symbol = '✖'
 
 
 
-let g:ale_linters = {'python': ['pylint'], 'cpp':['clang', 'gcc']} 
+let g:ale_linters = {'python': ['pylint'], 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder']} 
 nmap <silent> <a-k> <Plug>(ale_previous_wrap)
 nmap <silent> <a-j> <Plug>(ale_next_wrap)
 
@@ -470,7 +470,15 @@ endif
 " https://www.gnu.org/software/global/
 let $GTAGSLABEL = 'native-pygments'
 " sharem目录下
-let $GTAGSCONF = 'C:\\Users\\jing\\gtags.conf' "必须重新配置
+let g:is_win = has('win32')
+
+if has('win32')
+    let $GTAGSCONF = 'C:\\Users\\jing\\gtags.conf' "必须重新配置
+else
+    let $GTAGSCONF = '/home/jing/gtags.conf'
+endif
+
+
 
 " 配置 ctags 的参数
 " https://github.com/universal-ctags/ctags
@@ -479,10 +487,12 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
+autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
-
-
-
+" 交换tjump和tselect快捷键位置
+nnoremap g] :tjump <C-R><C-W><cr>
+nnoremap g<C-]> :tselect<C-R><C-W><cr>
 
 set guioptions=0
 
@@ -493,4 +503,10 @@ set noshowmode
 " 自动启动echodoc
 let g:echodoc#enable_at_startup=1
 set guifont=Fira\ Code:h12
+
+if has('nvim')
+    set inccommand=split
+
+endif
+
 set backspace=indent,eol,start
