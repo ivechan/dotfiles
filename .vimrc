@@ -67,7 +67,7 @@ Plug 'Shougo/echodoc.vim'
 " about Tags
 "Plug 'majutsushi/tagbar'
 
-Plug 'vim-scripts/gtags.vim'
+"Plug 'vim-scripts/gtags.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 Plug 'skywind3000/vim-preview'
@@ -91,7 +91,11 @@ Plug 'hdima/python-syntax', {'for': 'python'}
 " Cpp
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 "Plug 'vim-scripts/DoxygenToolkit.vim'
+"
+"
+"remote plugin
 
+Plug 'zenbro/mirror.vim'
 
 
 call plug#end()
@@ -117,6 +121,7 @@ syntax enable
 let python_highlight_all = 1
 " 自动补全
 filetype plugin indent on          
+runtime macros/matchit.vim
 set history=2000
 "　文件修改后自动载入
 set autoread
@@ -334,7 +339,8 @@ let g:rainbow#blacklist = [233, 234]
 nnoremap <C-p> :LeaderfFunction<Enter>
 nnoremap <a-m> :LeaderfMru<Enter>
 nnoremap <a-b> :LeaderfBuffer<CR>
-nnoremap <Leader>l :LeaderfLineCword<Enter>
+nnoremap <Leader>t :LeaderfTag<CR>
+nnoremap <Leader>l :LeaderfLineCword
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -510,3 +516,5 @@ if has('nvim')
 endif
 
 set backspace=indent,eol,start
+
+set autochdir
