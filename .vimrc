@@ -81,7 +81,7 @@ set background=dark
 set guioptions=0
 set guifont=Fira\ Code:h12
 colorscheme cobalt3
-set history = 2000
+set history=2000
 set autoread                 " 　文件修改后自动载入
 set autochdir
 set laststatus=2             " Always display the statusline in all windows
