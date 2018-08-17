@@ -35,6 +35,8 @@ Plug 'xolox/vim-session'
 
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
+Plug 'ryanoasis/vim-devicons'
+
 
 " Plug 'dikiaap/minimalist'
 
@@ -279,14 +281,14 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_server_log_level = 'info'
 set completeopt=menu,menuone
 let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_semantic_triggers =  {
-            \ 'c,cpp,python,go,rust': ['re!\w{2}'],
-            \ 'cs': ['re!\w{2}'],
-            \ }
+"let g:ycm_semantic_triggers =  {
+"            \ 'c,cpp,python,go,rust': ['re!\w{2}'],
+"            \ 'cs': ['re!\w{2}'],
+"            \ }
 
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
-let g:ycm_python_binary_path = 'python'
+let g:ycm_python_binary_path = 'python3'
 let g:ycm_auto_trigger=1
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR> 
@@ -335,6 +337,8 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
+let g:gutentags_define_advanced_commands=1
+
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
@@ -352,8 +356,7 @@ endif
 
 "let g:UltiSnipsExpandTrigger="<c-h>"
 "let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger="<c-tab>"
-let g:UltiSnipsListSnippets="<c-h>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
@@ -408,3 +411,13 @@ let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
+
+
+" make <Alt> work on gnome terminal
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set ttimeout ttimeoutlen=50
