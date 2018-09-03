@@ -97,7 +97,7 @@ let g:gruvbox_improved_warnings=1
 "colorscheme cobalt3
 set history=2000
 set autoread                 " 　文件修改后自动载入
-set autochdir
+"set autochdir
 set laststatus=2             " Always display the statusline in all windows
 set showtabline=2            " Always display the tabline, even if there is only one tab
 set noshowmode               " Hide the default mode text (e.g. -- INSERT -- below the statusline)
@@ -421,3 +421,7 @@ while c <= 'z'
   let c = nr2char(1+char2nr(c))
 endw
 set ttimeout ttimeoutlen=50
+
+nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+
