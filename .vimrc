@@ -38,7 +38,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 
 " Plug 'dikiaap/minimalist'
-Plug 'jpalardy/vim-slime'
+" Plug 'jpalardy/vim-slime'
 
 " fzf and ack, fuzzy finder
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -116,12 +116,11 @@ set undofile
 set undodir=~/.cache/undodir
 set encoding=utf-8           " set default encoding
 "set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
-if has("win32")
-    set fileencoding=chinese
-endif
-source $VIMRUNTIME/delmenu.vim  
-  
-source $VIMRUNTIME/menu.vim  
+"if has("win32")
+"    set fileencoding=chinese
+"endif
+"source $VIMRUNTIME/delmenu.vim
+"source $VIMRUNTIME/menu.vim
 set autoindent               " 自动缩进
 set ruler                    " 在右下角显示当前光标所在位置（行列）
 set scrolloff=3              " 至少保留在屏幕的行数
