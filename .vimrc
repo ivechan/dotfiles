@@ -37,8 +37,8 @@ Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 
-
 " Plug 'dikiaap/minimalist'
+Plug 'jpalardy/vim-slime'
 
 " fzf and ack, fuzzy finder
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -105,6 +105,9 @@ set noshowmode               " Hide the default mode text (e.g. -- INSERT -- bel
 set tabstop=4                " show existing tab with 4 space width
 set shiftwidth=4             " when indenting with '>' , using 4 space width
 set expandtab                " on pressing tab, insert 4 spaces
+set hidden
+set shiftwidth  =4         " >> indents by 4 spaces.
+set shiftround             " >> indents to next multiple of 'shiftwidth'
 set cursorline               " 突出显示
 set nobackup                 " no backup
 set noswapfile               " now swapfile
@@ -112,6 +115,13 @@ set noswapfile               " now swapfile
 set undofile
 set undodir=~/.cache/undodir
 set encoding=utf-8           " set default encoding
+"set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+if has("win32")
+    set fileencoding=chinese
+endif
+source $VIMRUNTIME/delmenu.vim  
+  
+source $VIMRUNTIME/menu.vim  
 set autoindent               " 自动缩进
 set ruler                    " 在右下角显示当前光标所在位置（行列）
 set scrolloff=3              " 至少保留在屏幕的行数
@@ -281,14 +291,14 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_server_log_level = 'info'
 set completeopt=menu,menuone
 let g:ycm_min_num_of_chars_for_completion = 2
-"let g:ycm_semantic_triggers =  {
-"            \ 'c,cpp,python,go,rust': ['re!\w{2}'],
-"            \ 'cs': ['re!\w{2}'],
-"            \ }
+" let g:ycm_semantic_triggers =  {
+"             \ 'c,cpp,python,go,rust': ['re!\w{2}'],
+"             \ 'cs': ['re!\w{2}'],
+"             \ }
 
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
-let g:ycm_python_binary_path = 'python3'
+let g:ycm_python_binary_path = 'python'
 let g:ycm_auto_trigger=1
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR> 
@@ -329,7 +339,7 @@ if has('win32')
 else
     let $GTAGSCONF = '/home/jing/gtags.conf'
 endif
-
+let gutentags_define_advanced_commands = 1
 " 配置 ctags 的参数
 " https://github.com/universal-ctags/ctags
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
@@ -337,14 +347,12 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
-let g:gutentags_define_advanced_commands=1
-
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
 " 交换tjump和tselect快捷键位置
-nnoremap g] :tjump <C-R><C-W><cr>
-nnoremap g<C-]> :tselect<C-R><C-W><cr>
+"nnoremap g] :tjump <C-R><C-W><cr>
+"nnoremap g<C-]> :tselect<C-R><C-W><cr>
 
 " 自动启动echodoc
 let g:echodoc#enable_at_startup=1
@@ -357,14 +365,17 @@ endif
 "let g:UltiSnipsExpandTrigger="<c-h>"
 "let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsListSnippets="<c-h>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
 " enable directwrite renderoption in windows
-if has('win32')
-    set renderoptions=type:directx,renmode:5,taamode:1
+if has('win32') 
+    if !has('nvim')
+        set renderoptions=type:directx,renmode:5,taamode:1
+    endif
 endif
 
 " neovim feature，让substitute命令即时显示
@@ -411,17 +422,7 @@ let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
-
-
-" make <Alt> work on gnome terminal
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-set ttimeout ttimeoutlen=50
+let g:slime_target = "vimterminal"
 
 nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
-
