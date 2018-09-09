@@ -1,243 +1,138 @@
-call plug#begin('~/vim/plugged')
-
-"nerdplugin
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' }
-Plug 'skywind3000/asyncrun.vim'
-" jump and easy edit
-Plug 'tpope/vim-surround'
-Plug 'easymotion/vim-easymotion'
-" argument text-object support
-Plug 'gaving/vim-textobj-argument'
-" rainbow parentheses
-Plug 'junegunn/rainbow_parentheses.vim'
-" enhanced asterisk * 
-Plug 'haya14busa/vim-asterisk'
-" repeat for vim-surround
-Plug 'tpope/vim-repeat', 
-" enhanced motion
-Plug 'tpope/vim-unimpaired'
-Plug 'godlygeek/tabular'
-" Completion
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'valloric/youcompleteme'
-Plug 'Shougo/echodoc.vim'
-" commentary
-Plug 'tpope/vim-commentary'
-" synatic check engine
-Plug 'w0rp/ale'
-Plug 'maximbaz/lightline-ale'
-" Session Manager
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-" colorscheme and airline
-
-Plug 'morhetz/gruvbox'
-Plug 'itchyny/lightline.vim'
-Plug 'ryanoasis/vim-devicons'
-
-" Plug 'dikiaap/minimalist'
-" Plug 'jpalardy/vim-slime'
-
-" fzf and ack, fuzzy finder
-"Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mileszs/ack.vim'
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
-Plug 'Yggdroot/LeaderF'
-" git plugin
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
-" about Tags
-"Plug 'majutsushi/tagbar'
-"Plug 'vim-scripts/gtags.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
-Plug 'skywind3000/vim-preview'
-
-" indent and format, auto pairs
+call plug#begin('~/vimfiles/plugged')
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }     " 文件浏览器
+Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' } " just one nerdtree
+Plug 'ryanoasis/vim-devicons'                              " 使用 NERD 字体让 vim 能显示图标
+Plug 'tpope/vim-surround'                                  " 更方便地使用括号，引号等成对出现的符号
+Plug 'easymotion/vim-easymotion'                           " easymotion
+Plug 'gaving/vim-textobj-argument'                         " argument text-object support
+Plug 'wellle/targets.vim'                                  " provides additional text objects
+Plug 'junegunn/rainbow_parentheses.vim'                    " rainbow parentheses
+Plug 'haya14busa/vim-asterisk'                             " enhanced asterisk *
+Plug 'tpope/vim-repeat'                                    " repeat for vim-surround
+Plug 'tpope/vim-unimpaired'                                " Pairs of handy bracket mappings
+Plug 'godlygeek/tabular'                                   " 更简单地对齐
+Plug 'SirVer/ultisnips'                                    " snippets框架
+Plug 'ivechan/vim-snippets'                                " 具体某个语言的snippets, 自定义
+Plug 'valloric/youcompleteme'                              " 补全框架
+Plug 'Shougo/echodoc.vim'                                  " 补全的时候，在 statusline 显示函数原型
+Plug 'tpope/vim-commentary'                                " 使用 gc 来注释
+Plug 'w0rp/ale'                                            " 异步代码检查 (Linting) 框架
+Plug 'maximbaz/lightline-ale'                              " 在右下角显示 linting 状态
+Plug 'xolox/vim-misc'                                      " 一些补充函数
+Plug 'xolox/vim-session'                                   " Session Manager
+Plug 'tomasr/molokai'                                      " monokai 配色
+                                                           " Plug 'morhetz/gruvbox'
+Plug 'itchyny/lightline.vim'                               " statusline 插件
+Plug 'skywind3000/asyncrun.vim'                            " 异步运行插件
+Plug 'mileszs/ack.vim'                                     " ack - search it.
+Plug 'Yggdroot/LeaderF'                                    " fuzzy jumping plugin
+Plug 'tpope/vim-fugitive'                                  " git plugin
+Plug 'mhinz/vim-signify'                                   " 在 git 仓库下文件里，在更改行左边显示标志
+                                                           " Plug 'vim-scripts/gtags.vim'              " 这个太老了，自行去 GNU Global下载
+Plug 'ludovicchabant/vim-gutentags'                        " 自动管理 gtags/ctags 的插件
+                                                           " Plug 'skywind3000/gutentags_plus'         " 在多项目里管理 tags 生成，不过 bug 多
+Plug 'skywind3000/vim-preview'                             " 同上
 Plug 'jiangmiao/auto-pairs'
-"Plug 'Chiel92/vim-autoformat'
-" indent visualization
-"Plug 'nathanaelkane/vim-indent-guides'
-
-" Python
-Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'hdima/python-syntax', {'for': 'python'}
-
-" Cpp
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+                                                           " Plug 'nathanaelkane/vim-indent-guides'    " 显示 indent，不过一般不用
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
+Plug 'hdima/python-syntax', {'for': 'python'}              " 增强对 Python 语法支持
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
 call plug#end()
-
-syntax enable
-filetype plugin indent on          
-runtime macros/matchit.vim "enhanced matching
-
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " true color and colorscheme UI and font
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let mapleader = ' '          " change leader key to <space>
 let g:mapleader = ' '        " change leader key to <space>
 
+syntax enable
+filetype plugin indent on          
+runtime macros/matchit.vim " enhanced matching
 set nocompatible
-set termguicolors
+
+
+set langmenu=en_US  " 将 vim 语言设置为 en,主要应对中文环境下乱码问题
+let $LANG='en'
+source $VIMRUNTIME/delmenu.vim 
+source $VIMRUNTIME/menu.vim
+
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " true color and colorscheme UI and font
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " true color and colorscheme UI and font
+
+set termguicolors              " true color and colorscheme UI and font
 set background=dark
-set guioptions=0
-"https://github.com/ryanoasis/nerd-fonts
-set guifont=FuraMono\ NF:h10
+set guioptions=0               " 不需要一些 gui，影响可视区域
+set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
+colorscheme molokai            " 最好的颜色方案
 
-"colorscheme monokai
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
-
-"let g:gruvbox_improved_strings=1
-let g:gruvbox_improved_warnings=1
-
-"colorscheme cobalt3
-set history=2000
-set autoread                 " 　文件修改后自动载入
-"set autochdir
-set laststatus=2             " Always display the statusline in all windows
-set showtabline=2            " Always display the tabline, even if there is only one tab
-set noshowmode               " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-"set noshowmode               " echodoc setting
-set tabstop=4                " show existing tab with 4 space width
-set shiftwidth=4             " when indenting with '>' , using 4 space width
-set expandtab                " on pressing tab, insert 4 spaces
+set history=2000               " 最大2000条历史，够用了吧？
+set autoread                   " 　文件修改后自动载入
+set laststatus=2               " Always display the statusline in all windows
+set showtabline=2              " Always display the tabline, even if there is only one tab
+set noshowmode                 " Hide the default mode text (e.g. -- INSERT -- below the statusline), also for echodoc setting
+set tabstop=4                  " show existing tab with 4 space width
+set shiftwidth=4               " when indenting with '>' , using 4 space width
+set expandtab                  " on pressing tab, insert 4 spaces
 set hidden
-set shiftwidth  =4         " >> indents by 4 spaces.
-set shiftround             " >> indents to next multiple of 'shiftwidth'
-set cursorline               " 突出显示
-set nobackup                 " no backup
-set noswapfile               " now swapfile
-"set dir=~/.cache/swapfiles   " change swapfile dir for not polluteing current dir.
+set shiftwidth =4              " >> indents by 4 spaces.
+set shiftround                 " >> indents to next multiple of 'shiftwidth'
+set cursorline                 " 突出显示
+set nobackup                   " no backup
+set noswapfile                 " now swapfile
 set undofile
 set undodir=~/.cache/undodir
-set encoding=utf-8           " set default encoding
-"set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
-"if has("win32")
-"    set fileencoding=chinese
-"endif
-"source $VIMRUNTIME/delmenu.vim
-"source $VIMRUNTIME/menu.vim
-set autoindent               " 自动缩进
-set ruler                    " 在右下角显示当前光标所在位置（行列）
-set scrolloff=3              " 至少保留在屏幕的行数
-set number                   " print the line number in front of each line
-set wildmenu                 " 在命令行上面显示候选项
+set encoding=utf-8             " set default encoding
+set autoindent                 " 自动缩进
+set ruler                      " 在右下角显示当前光标所在位置（行列）
+set scrolloff=3                " 至少保留在屏幕的行数
+set number                     " print the line number in front of each line
+set wildmenu                   " 在命令行上面显示候选项
 set wildmode=full
 set visualbell
-set laststatus=2
 set ignorecase
 set smartcase
-set gdefault                 " 在substitute命令的时候，默认执行整行内的匹配项而不是一个
-set incsearch                " 在执行搜索/命令的时候，及时显示到那里
-set hlsearch                 " highlight search result
+set gdefault                   " 在substitute命令的时候，默认执行整行内的匹配项而不是一个
+set incsearch                  " 在执行搜索/命令的时候，及时显示到那里
+set hlsearch                   " highlight search result
 set textwidth=80
 set colorcolumn=80
 set backspace=indent,eol,start
 
-set wildignore+=.o,*.bak,*.byte,*.native,*~,*.sw?,*.aux,*.toc,*.hg,*.git,*.svn,*.hi,*.so,*.a,*.pyc,*.aux,*.toc,*.exe " 隐藏一些自动生成的文件
-" 在Normal模式下用Tab实现%的匹配作用，但是想不起来用，所以注释
-" nnoremap <tab> %
-" vnoremap <tab> %
+set wildignore+=.o,*.bak,*~,*.sw?,*.aux,*.toc,*.git,*.svn,*.so,*.a,*.pyc,*.aux,*.toc,*.exe " 隐藏一些自动生成的文件
 
 nnoremap j gj
 nnoremap k gk
-" F1　误触
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-
-" nnoremap ; :
+inoremap <F1> <ESC> " 防止F1误触
+nnoremap <F1> <ESC> " F1误触
+vnoremap <F1> <ESC> " F1误触
 inoremap jj <ESC>
-" 快捷键分屏
 nnoremap <leader>w <C-w>v<C-w>l
-
-" 更简单的分屏宽口移动
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+set shortmess+=c " dot't give ins-completion-menu message
 
-" dot't give ins-completion-menu message
-set shortmess+=c
-
-
-" build command
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType rust nmap <leader>r  :RustRun<CR>
-autocmd FileType cpp nmap <leader>b :AsyncRun ninja -C ./build<CR>
-autocmd FileType cpp nmap <leader>r :AsyncRun ./build/demo<CR>
-
-" automatically open quickfix window when AsyncRun command is executed
-" set the quickfix window 6 lines height.
-let g:asyncrun_open = 6
-
-" ring the bell to notify you job finished
-let g:asyncrun_bell = 1
-
-" F10 to toggle quickfix window
+" AsyncRun
+let g:asyncrun_open = 6 " set the quickfix window 6 lines height.
+let g:asyncrun_bell = 1 " ring the bell to notify you job finished
+" F10 or m-q to toggle quickfix window
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
-nnoremap <a-q> :call asyncrun#quickfix_toggle(6)<cr>
-
-
-" NERDTree setting
-
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-     exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-      exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-  
-  call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-  call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-  call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-  call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-  call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-  call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-  call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-  call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-  call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-  call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-  call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-  call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-  call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-nnoremap <c-n> :NERDTreeToggle<CR>
-nmap <F8> :TagbarToggle<CR>
-
+nnoremap <M-q> :call asyncrun#quickfix_toggle(6)<cr>
+" F5 运行当前文件， F9 编译
+nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " parentheses color
 au VimEnter * RainbowParentheses
 let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']']]
-
-" List of colors that you do not want. ANSI code or #RRGGBB
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{}', '}']]
 let g:rainbow#blacklist = [233, 234]
 
-" noremap <F3> :Autoformat<CR>
-
-
-" fzf shortcut
-"nnoremap <Leader>a :Ag<Space><Enter>
-"nnoremap <Leader>l :BLines<Space><Enter>
-"nnoremap <Leader>g :GFiles<Space><Enter>
-""nnoremap <Leader>f :Files<Space><Enter>
-"nnoremap <Leader>t :BTags<Space><Enter>
-"nnoremap <Leader>b :Buffers<Space><Enter>
-"nnoremap <C-p> :GFiles<Space><Enter>
-nnoremap <C-p> :LeaderfFunction<Enter>
-nnoremap <a-m> :LeaderfMru<Enter>
-nnoremap <a-b> :LeaderfBuffer<CR>
+" Leaderf
+"nnoremap <C-p> :LeaderfFunction<Enter>
+nnoremap <M-m> :LeaderfMru<Enter>
 nnoremap <Leader>t :LeaderfTag<CR>
 nnoremap <Leader>l :LeaderfLine<CR>
 "inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 
 " asterisk setting
 let g:asterisk#keeppos = 1
@@ -257,69 +152,46 @@ map gz# <Plug>(asterisk-gz#)
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-"
-cnoreabbrev Ack Ack
+cnoreabbrev ack Ack
 nnoremap <Leader>a :Ack<Space>
 
 " Session Plugin Config
-:let g:session_autosave = 'no'
+:let g:session_autosave = 'no' " 不自动保存session
+
 " ale
-let g:airline#extensions#ale#enabled = 0
-"let g:ale_sign_warning = '⚠'
-"let g:ycm_warning_symbol = '⚠'
-let g:ale_sign_error = '✖'
-"let g:ycm_error_symbol = '✖'
-"let g:ale_sign_error = '>>'
-"let g:ale_sign_warning = '--'
-
+let g:airline#extensions#ale#enabled = 0 " 使用lightline，所以关闭airline支持
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
 let g:ale_linters = {'python': ['pylint'], 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder']} 
-nmap <silent> <a-k> <Plug>(ale_previous_wrap)
-nmap <silent> <a-j> <Plug>(ale_next_wrap)
-
-let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_text_changed = 'never' " 仅在打开文件和保存的时候 Lint 
 let g:ale_lint = 1
-" ycm settting
-let g:ycm_key_invoke_completion = '<C-x><C-o>'
-"let g:ycm_autoclose_preview_window_after_insertion = 1
-" 在错误行高亮显示
-"highlight YcmErrorLine guibg=#3f0000
+" ALE 快捷键快速跳转
+nmap <silent> <M-k> <Plug>(ale_previous_wrap) 
+nmap <silent> <M-j> <Plug>(ale_next_wrap)
 
-" 不使用preview
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_server_log_level = 'info'
+" YCM 设置
+let g:ycm_key_invoke_completion = '<C-x><C-o>'
+let g:ycm_add_preview_to_completeopt = 0 " preview窗口影响布局
+let g:ycm_show_diagnostics_ui = 0 " 已经有更好的ALE
 set completeopt=menu,menuone
 let g:ycm_min_num_of_chars_for_completion = 2
-" let g:ycm_semantic_triggers =  {
-"             \ 'c,cpp,python,go,rust': ['re!\w{2}'],
-"             \ 'cs': ['re!\w{2}'],
-"             \ }
-
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_python_binary_path = 'python'
 let g:ycm_auto_trigger=1
-
 nnoremap <leader>jd :YcmCompleter GoTo<CR> 
-"nnoremap <leader>dg :YcmDiags<CR> 
 
 
 " tags setting
-"tag文件设置为.tag, 不会污染
-"set tags=./.tags;,.tags
-
 
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = expand('~/.cache/tags')
-
 " 禁止插件自动加载gtags数据库，用plus插件来控制
 let g:gutentags_auto_add_gtags_cscope = 0
-
 " 所生成的数据文件的名称
 let g:gutentags_ctags_tagfile = '.tags'
 
@@ -331,7 +203,6 @@ endif
 " gtags 配置
 " https://www.gnu.org/software/global/
 let $GTAGSLABEL = 'native-pygments'
-" sharem目录下
 
 if has('win32')
     let $GTAGSCONF = 'C:\\Users\\jing\\gtags.conf' "必须重新配置
@@ -339,35 +210,26 @@ else
     let $GTAGSCONF = '/home/jing/gtags.conf'
 endif
 let gutentags_define_advanced_commands = 1
-" 配置 ctags 的参数
-" https://github.com/universal-ctags/ctags
+" 配置 ctags 的参数 https://github.com/universal-ctags/ctags
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px-d']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px-d']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+let Gtags_No_Auto_Jump=1
 
+" vim-preview 快捷键
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
-" 交换tjump和tselect快捷键位置
-"nnoremap g] :tjump <C-R><C-W><cr>
-"nnoremap g<C-]> :tselect<C-R><C-W><cr>
-
 " 自动启动echodoc
 let g:echodoc#enable_at_startup=1
+" 启用 python 高亮
 let python_highlight_all = 1
 
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
-
-"let g:UltiSnipsExpandTrigger="<c-h>"
-"let g:UltiSnipsExpandTrigger="<tab>"
+" UltiSnip插件
 let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsListSnippets="<c-h>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
 " enable directwrite renderoption in windows
@@ -377,9 +239,8 @@ if has('win32')
     endif
 endif
 
-" neovim feature，让substitute命令即时显示
 if has('nvim')
-  set inccommand=nosplit
+    set inccommand=nosplit
 endif
 
 "lightline configuration
@@ -393,7 +254,7 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
-
+" 在右下角显示 Linting状态
 let g:lightline.component_expand = {
       \  'linter_checking': 'lightline#ale#checking',
       \  'linter_warnings': 'lightline#ale#warnings',
@@ -406,7 +267,6 @@ let g:lightline.component_type = {
       \     'linter_errors': 'error',
       \     'linter_ok': 'left',
       \ }
-
 let g:lightline.active = {
     \ 'left': [ [ 'mode', 'paste' ],
     \           ['gitbranch', 'readonly', 'filename', 'modified' ] ],
@@ -417,11 +277,25 @@ let g:lightline.active = {
     \          ]
     \ }
 
+" 使用NERD 字体下的图标显示
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
-let g:slime_target = "vimterminal"
 
-nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
-nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+
+" autopairs快捷键会冲突，禁用掉
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsShortcutJump=''
+let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'", '`':'`'}
+
+" Gtags 快捷键
+nmap <leader>g :Gtags<SPACE>
+nmap <leader>c :GtagsCursor<CR>
+nmap <leader>p :Gtags -f %<CR>
+
+nmap <C-n> :cn<CR>
+nmap <C-p> :cp<CR>
+nmap <C-\><C-]> :GtagsCursor<CR>
+
+nmap <M-n> :NERDTreeTabsToggle <CR>
