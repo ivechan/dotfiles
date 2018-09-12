@@ -1,6 +1,6 @@
 call plug#begin('~/vim/plugged')
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeTabsToggle' }     " 文件浏览器
-Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' } " just one nerdtree
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }     " 文件浏览器
+Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' } " just one nerdtree
 Plug 'ryanoasis/vim-devicons'                              " 使用 NERD 字体让 vim 能显示图标
 Plug 'tpope/vim-surround'                                  " 更方便地使用括号，引号等成对出现的符号
 Plug 'easymotion/vim-easymotion'                           " easymotion
@@ -31,7 +31,7 @@ Plug 'mhinz/vim-signify'                                   " 在 git 仓库下�
                                                            " Plug 'vim-scripts/gtags.vim'              " 这个太老了，自行去 GNU Global下载
 Plug 'ivechan/gtags.vim'                                   " gtags 插件
 Plug 'ludovicchabant/vim-gutentags'                        " 自动管理 gtags/ctags 的插件
-Plug 'skywind3000/gutentags_plus'         " 在多项目里管理 tags 生成，不过 bug 多
+Plug 'skywind3000/gutentags_plus'                          " 在多项目里管理 tags 生成，不过 bug 多
 Plug 'skywind3000/vim-preview'                             " 同上
 Plug 'jiangmiao/auto-pairs'
                                                            " Plug 'nathanaelkane/vim-indent-guides'    " 显示 indent，不过一般不用
@@ -150,11 +150,14 @@ map gz# <Plug>(asterisk-gz#)
 
 
 " ag
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+"if executable('ag')
+"  let g:ackprg = 'ag --vimgrep'
+"endif
+if executable('rg')
+  let g:ackprg = 'rg --type-add "jing:*.{py,c,cpp,cc,cxx,h,hpp}" -tjing --vimgrep -S'
 endif
-cnoreabbrev ack Ack
-nnoremap <Leader>a :Ack<Space>
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 " Session Plugin Config
 :let g:session_autosave = 'no' " 不自动保存session
@@ -206,7 +209,7 @@ endif
 let $GTAGSLABEL = 'native-pygments'
 
 if has('win32')
-    let $GTAGSCONF = 'C:\\Users\\jing\\gtags.conf' "必须重新配置
+    let $GTAGSCONF = 'C:\Users\jing\gtags.conf' "必须重新配置
 else
     let $GTAGSCONF = '/home/jing/gtags.conf'
 endif
@@ -216,6 +219,8 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px-d']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px-d']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+let g:gutentags_ctags_extra_args += ['--exclude=@.gitignore']
+let g:gutentags_ctags_extra_args += ['--exclude=@.ignore']
 let Gtags_No_Auto_Jump=1
 let g:Gtags_Close_When_Single=1 " when single and jump
 
@@ -294,10 +299,10 @@ let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'", '`':'`'}
 nnoremap <leader>g :Gtags<SPACE>
 nnoremap <leader>c :GtagsCursor<CR>
 nnoremap <leader>p :Gtags -f %<CR>
+nnoremap <M-p> :Gtags -f %<CR>
 
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 nnoremap <C-\><C-]> :GtagsCursorAndJump<CR>
 
-nnoremap <M-n> :NERDTreeTabsToggle<CR>
-
+nnoremap <M-n> :NERDTreeToggle<CR>
