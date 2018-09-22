@@ -297,7 +297,7 @@ let g:lightline.active = {
     \ }
 
 " 使用NERD 字体下的图标显示
-if has('gui_runing')
+if has('gui_running')
     let g:lightline#ale#indicator_checking = "\uf110"
     let g:lightline#ale#indicator_warnings = "\uf071"
     let g:lightline#ale#indicator_errors = "\uf05e"
