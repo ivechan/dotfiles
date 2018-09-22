@@ -38,6 +38,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
 Plug 'hdima/python-syntax', {'for': 'python'}              " 增强对 Python 语法支持
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
+Plug 'lervag/vimtex'
 call plug#end()
 
 let mapleader = ' '          " change leader key to <space>
@@ -63,6 +64,7 @@ set guioptions=0               " 不需要一些 gui，影响可视区域
 set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 colorscheme molokai            " 最好的颜色方案
 
+"set iskeyword-=_               " 让vim把vim当成分隔符
 set history=2000               " 最大2000条历史，够用了吧？
 set autoread                   " 　文件修改后自动载入
 set laststatus=2               " Always display the statusline in all windows
@@ -112,8 +114,8 @@ nnoremap <C-l> <C-w>l
 set shortmess+=c " dot't give ins-completion-menu message
 
 " AsyncRun
-let g:asyncrun_open = 6 " set the quickfix window 6 lines height.
-let g:asyncrun_bell = 1 " ring the bell to notify you job finished
+"let g:asyncrun_open = 6 " set the quickfix window 6 lines height.
+"let g:asyncrun_bell = 1 " ring the bell to notify you job finished
 " F10 or m-q to toggle quickfix window
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 nnoremap <M-q> :call asyncrun#quickfix_toggle(6)<cr>
@@ -128,7 +130,7 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{}', '}']]
 let g:rainbow#blacklist = [233, 234]
 
 " Leaderf
-"nnoremap <C-p> :LeaderfFunction<Enter>
+nnoremap <M-p> :LeaderfBufTag<CR>
 nnoremap <M-m> :LeaderfMru<Enter>
 nnoremap <Leader>t :LeaderfTag<CR>
 nnoremap <Leader>l :LeaderfLine<CR>
@@ -196,6 +198,15 @@ let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 " 禁止插件自动加载gtags数据库，用plus插件来控制
 let g:gutentags_auto_add_gtags_cscope = 0
+noremap <silent> <leader>cs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>cg :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>cc :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>ct :GscopeFind t <C-R><C-W><cr
+noremap <silent> <leader>ca :GscopeFind a <C-R><C-W><cr>
+noremap <silent> <leader>cd :GscopeFind d <C-R><C-W><cr>
+
+let g:gutentags_plus_nomap = 1
+
 " 所生成的数据文件的名称
 let g:gutentags_ctags_tagfile = '.tags'
 
@@ -215,14 +226,14 @@ else
 endif
 let gutentags_define_advanced_commands = 1
 " 配置 ctags 的参数 https://github.com/universal-ctags/ctags
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px-d']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px-d']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-let g:gutentags_ctags_extra_args += ['--exclude=@.gitignore']
-let g:gutentags_ctags_extra_args += ['--exclude=@.ignore']
-let Gtags_No_Auto_Jump=1
-let g:Gtags_Close_When_Single=1 " when single and jump
+"let g:gutentags_ctags_extra_args += ['--exclude=@.gitignore']
+"let g:gutentags_ctags_extra_args += ['--exclude=@.ignore']
+"let Gtags_No_Auto_Jump=1
+"let g:Gtags_Close_When_Single=1 " when single and jump
 
 " vim-preview 快捷键
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
@@ -284,11 +295,12 @@ let g:lightline.active = {
     \ }
 
 " 使用NERD 字体下的图标显示
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
-
+if has('gui_runing')
+    let g:lightline#ale#indicator_checking = "\uf110"
+    let g:lightline#ale#indicator_warnings = "\uf071"
+    let g:lightline#ale#indicator_errors = "\uf05e"
+    let g:lightline#ale#indicator_ok = "\uf00c"
+end
 
 " autopairs快捷键会冲突，禁用掉
 let g:AutoPairsShortcutToggle = ''
@@ -296,14 +308,15 @@ let g:AutoPairsShortcutJump=''
 let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'", '`':'`'}
 
 " Gtags 快捷键
-nnoremap <leader>g :Gtags<SPACE>
-nnoremap <leader>c :GtagsCursor<CR>
-nnoremap <leader>p :Gtags -f %<CR>
-nnoremap <M-p> :Gtags -f %<CR>
+"nnoremap <leader>g :Gtags<SPACE>
+"nnoremap <leader>c :GtagsCursor<CR>
+"nnoremap <leader>p :Gtags -f %<CR>
+"nnoremap <M-p> :Gtags -f %<CR>
 
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
-nnoremap <C-\><C-]> :GtagsCursorAndJump<CR>
+"nnoremap <C-\><C-]> :GtagsCursorAndJump<CR>
+
 nnoremap <M-n> :NERDTreeToggle<CR>
 
 " set working directory to git project root
@@ -319,4 +332,8 @@ function! SetProjectRoot()
     lcd `=git_dir`
   endif
 endfunction
-autocmd BufRead * silent! call SetProjectRoot()
+
+command CD silent! call SetProjectRoot()
+inoremap lkj <ESC>:w<CR>
+nnoremap lkj :w<CR>
+
