@@ -1,7 +1,8 @@
 call plug#begin('~/vim/plugged')
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }     " 文件浏览器
-Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' } " just one nerdtree
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }     " 文件浏览器
+"Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' } " just one nerdtree
 Plug 'ryanoasis/vim-devicons'                              " 使用 NERD 字体让 vim 能显示图标
+Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-surround'                                  " 更方便地使用括号，引号等成对出现的符号
 Plug 'easymotion/vim-easymotion'                           " easymotion
 Plug 'gaving/vim-textobj-argument'                         " argument text-object support
@@ -130,7 +131,8 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{}', '}']]
 let g:rainbow#blacklist = [233, 234]
 
 " Leaderf
-nnoremap <M-p> :LeaderfBufTag<CR>
+nnoremap <M-p> :LeaderfFunction<CR>
+nnoremap <Leader>p :LeaderfBufTag<CR>
 nnoremap <M-m> :LeaderfMru<Enter>
 nnoremap <Leader>t :LeaderfTag<CR>
 nnoremap <Leader>l :LeaderfLine<CR>
@@ -317,7 +319,7 @@ nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 "nnoremap <C-\><C-]> :GtagsCursorAndJump<CR>
 
-nnoremap <M-n> :NERDTreeToggle<CR>
+"nnoremap <M-n> :NERDTreeToggle<CR>
 
 " set working directory to git project root
 " or directory of current file if not git project
@@ -333,7 +335,7 @@ function! SetProjectRoot()
   endif
 endfunction
 
-command CD silent! call SetProjectRoot()
+command! CD silent! call SetProjectRoot()
 inoremap lkj <ESC>:w<CR>
 nnoremap lkj :w<CR>
 
