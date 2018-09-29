@@ -1,7 +1,7 @@
 call plug#begin('~/vim/plugged')
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }     " 文件浏览器
 "Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' } " just one nerdtree
-Plug 'ryanoasis/vim-devicons'                              " 使用 NERD 字体让 vim 能显示图标
+"Plug 'ryanoasis/vim-devicons'                              " 使用 NERD 字体让 vim 能显示图标
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-surround'                                  " 更方便地使用括号，引号等成对出现的符号
 Plug 'easymotion/vim-easymotion'                           " easymotion
@@ -25,6 +25,7 @@ Plug 'tomasr/molokai'                                      " monokai 配色
                                                            " Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'                               " statusline 插件
 Plug 'skywind3000/asyncrun.vim'                            " 异步运行插件
+Plug 'skywind3000/vimmake'
 Plug 'mileszs/ack.vim'                                     " ack - search it.
 Plug 'Yggdroot/LeaderF'                                    " fuzzy jumping plugin
 Plug 'tpope/vim-fugitive'                                  " git plugin
@@ -37,9 +38,12 @@ Plug 'skywind3000/vim-preview'                             " 同上
 Plug 'jiangmiao/auto-pairs'
                                                            " Plug 'nathanaelkane/vim-indent-guides'    " 显示 indent，不过一般不用
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
-Plug 'hdima/python-syntax', {'for': 'python'}              " 增强对 Python 语法支持
+Plug 'hdima/python-syntax'                                 " 增强对 Python 语法支持
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
 Plug 'lervag/vimtex'
+Plug 'rakr/vim-one'
+Plug 'ayu-theme/ayu-vim'
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
 let mapleader = ' '          " change leader key to <space>
@@ -59,11 +63,14 @@ source $VIMRUNTIME/menu.vim
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " true color and colorscheme UI and font
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " true color and colorscheme UI and font
 
+
+let python_highlight_all = 1
+
 set termguicolors              " true color and colorscheme UI and font
-set background=dark
+set background=light
 set guioptions=0               " 不需要一些 gui，影响可视区域
 set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
-colorscheme molokai            " 最好的颜色方案
+colorscheme PaperColor            " 最好的颜色方案
 
 "set iskeyword-=_               " 让vim把vim当成分隔符
 set history=2000               " 最大2000条历史，够用了吧？
@@ -107,7 +114,7 @@ inoremap <F1> <ESC> " 防止F1误触
 nnoremap <F1> <ESC> " F1误触
 vnoremap <F1> <ESC> " F1误触
 inoremap jj <ESC>
-nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -121,8 +128,8 @@ set shortmess+=c " dot't give ins-completion-menu message
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 nnoremap <M-q> :call asyncrun#quickfix_toggle(6)<cr>
 " F5 运行当前文件， F9 编译
-nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
-nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+"nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+"nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " parentheses color
 au VimEnter * RainbowParentheses
@@ -244,7 +251,7 @@ autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 " 自动启动echodoc
 let g:echodoc#enable_at_startup=1
 " 启用 python 高亮
-let python_highlight_all = 1
+"let python_highlight_all = 1
 
 " UltiSnip插件
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -265,6 +272,7 @@ endif
 
 "lightline configuration
 let g:lightline = {
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -337,5 +345,23 @@ endfunction
 
 command! CD silent! call SetProjectRoot()
 inoremap lkj <ESC>:w<CR>
-nnoremap lkj :w<CR>
+nnoremap <Leader>w :w<CR>
 
+" vimmake setting
+let g:vimmake_mode = {}
+let g:vimmake_mode['py'] = 'normal'
+noremap <F5> :VimTool run<cr>
+inoremap <F5> <ESC>:VimTool run<cr>
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
