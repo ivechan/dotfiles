@@ -303,6 +303,24 @@ let g:lightline.active = {
     \            [ 'fileformat', 'fileencoding', 'filetype' ] ,
     \          ]
     \ }
+    
+function! Lightline_Tab_Absolutepath(n) abort
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let _ = expand('#'.buflist[winnr - 1])
+  return _ !=# '' ? _ : '[No Name]'
+endfunction
+
+let g:lightline.tab_component_function = {
+        \ 'filename': 'lightline#tab#filename',
+        \ 'absolutepath': 'Lightline_Tab_Absolutepath',
+        \ 'modified': 'lightline#tab#modified',
+        \ 'readonly': 'lightline#tab#readonly',
+        \ 'tabnum': 'lightline#tab#tabnum' }
+let g:lightline.tab = {
+    \ 'active': [ 'tabnum', 'absolutepath', 'modified' ],
+    \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }
+
 
 " 使用NERD 字体下的图标显示
 if has('gui_running')
