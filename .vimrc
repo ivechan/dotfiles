@@ -27,7 +27,8 @@ Plug 'majutsushi/tagbar'
 Plug 'itchyny/lightline.vim'                               " statusline 插件
 Plug 'skywind3000/asyncrun.vim'                            " 异步运行插件
 Plug 'skywind3000/vimmake'
-Plug 'mileszs/ack.vim'                                     " ack - search it.
+"Plug 'mileszs/ack.vim'                                     " ack - search it.
+Plug 'mhinz/vim-grepper'
 Plug 'Yggdroot/LeaderF'                                    " fuzzy jumping plugin
 Plug 'tpope/vim-fugitive'                                  " git plugin
 Plug 'mhinz/vim-signify'                                   " 在 git 仓库下文件里，在更改行左边显示标志
@@ -166,11 +167,11 @@ map gz# <Plug>(asterisk-gz#)
 "if executable('ag')
 "  let g:ackprg = 'ag --vimgrep'
 "endif
-if executable('rg')
-  let g:ackprg = 'rg --type-add "jing:*.{py,c,cpp,cc,cxx,h,hpp}" -tjing --vimgrep -S'
-endif
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
+"if executable('rg')
+"  let g:ackprg = 'rg -H --no-heading --vimgrep'
+"endif
+"cnoreabbrev Ack Ack!
+"nnoremap <Leader>a :Ack!<Space>
 
 " Session Plugin Config
 :let g:session_autosave = 'no' " 不自动保存session
@@ -386,3 +387,11 @@ let g:PaperColor_Theme_Options = {
 "let g:tagbar_width = 30
 "let g:tagbar_left = 1
 nnoremap <silent> <F9> :TagbarToggle<CR>
+
+
+" Grepper
+"let g:grepper = {}
+"let g:grepper.tools =  ['rg','git']
+nnoremap <leader>g :Grepper -tool rg<cr>
+nnoremap <leader>a :Grepper -tool rg<cr>
+nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
