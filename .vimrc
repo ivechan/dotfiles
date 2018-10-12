@@ -22,6 +22,7 @@ Plug 'maximbaz/lightline-ale'                              " 在右下角显示 
 Plug 'xolox/vim-misc'                                      " 一些补充函数
 Plug 'xolox/vim-session'                                   " Session Manager
 Plug 'tomasr/molokai'                                      " monokai 配色
+Plug 'majutsushi/tagbar'
                                                            " Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'                               " statusline 插件
 Plug 'skywind3000/asyncrun.vim'                            " 异步运行插件
@@ -31,7 +32,7 @@ Plug 'Yggdroot/LeaderF'                                    " fuzzy jumping plugi
 Plug 'tpope/vim-fugitive'                                  " git plugin
 Plug 'mhinz/vim-signify'                                   " 在 git 仓库下文件里，在更改行左边显示标志
                                                            " Plug 'vim-scripts/gtags.vim'              " 这个太老了，自行去 GNU Global下载
-Plug 'ivechan/gtags.vim'                                   " gtags 插件
+"Plug 'ivechan/gtags.vim'                                   " gtags 插件
 Plug 'ludovicchabant/vim-gutentags'                        " 自动管理 gtags/ctags 的插件
 Plug 'skywind3000/gutentags_plus'                          " 在多项目里管理 tags 生成，不过 bug 多
 Plug 'skywind3000/vim-preview'                             " 同上
@@ -42,7 +43,6 @@ Plug 'hdima/python-syntax'                                 " 增强对 Python �
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
 Plug 'lervag/vimtex'
 Plug 'rakr/vim-one'
-Plug 'ayu-theme/ayu-vim'
 Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
@@ -67,12 +67,13 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " true color and colorscheme UI and font
 let python_highlight_all = 1
 
 set termguicolors              " true color and colorscheme UI and font
-set background=light
+set background=dark
 set guioptions=0               " 不需要一些 gui，影响可视区域
 set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 colorscheme PaperColor            " 最好的颜色方案
 
 "set iskeyword-=_               " 让vim把vim当成分隔符
+set fileformat=unix
 set history=2000               " 最大2000条历史，够用了吧？
 set autoread                   " 　文件修改后自动载入
 set laststatus=2               " Always display the statusline in all windows
@@ -86,7 +87,7 @@ set shiftwidth =4              " >> indents by 4 spaces.
 set shiftround                 " >> indents to next multiple of 'shiftwidth'
 set cursorline                 " 突出显示
 set nobackup                   " no backup
-set noswapfile                 " now swapfile
+set swapfile                 " now swapfile
 set undofile
 set undodir=~/.cache/undodir
 set encoding=utf-8             " set default encoding
@@ -141,8 +142,9 @@ let g:rainbow#blacklist = [233, 234]
 nnoremap <M-p> :LeaderfFunction<CR>
 nnoremap <Leader>p :LeaderfBufTag<CR>
 nnoremap <M-m> :LeaderfMru<Enter>
-nnoremap <Leader>t :LeaderfTag<CR>
+" nnoremap <Leader>t :LeaderfTag<CR>
 nnoremap <Leader>l :LeaderfLine<CR>
+nnoremap <Leader>t :TagbarToggle<CR>
 "inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -272,14 +274,12 @@ endif
 
 "lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
       \ },
+      \ 'component': {
+      \  'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
+      \  },
       \ }
 " 在右下角显示 Linting状态
 let g:lightline.component_expand = {
@@ -296,21 +296,21 @@ let g:lightline.component_type = {
       \ }
 let g:lightline.active = {
     \ 'left': [ [ 'mode', 'paste' ],
-    \           ['gitbranch', 'readonly', 'filename', 'modified' ] ],
+    \           ['gitbranch', 'readonly', 'filename', 'modified' ],
+    \           ['tagbar']
+    \         ],
     \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings'],
     \            [ 'lineinfo' ],
     \            [ 'percent' ],
     \            [ 'fileformat', 'fileencoding', 'filetype' ] ,
     \          ]
     \ }
-    
 function! Lightline_Tab_Absolutepath(n) abort
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
   let _ = expand('#'.buflist[winnr - 1])
   return _ !=# '' ? _ : '[No Name]'
 endfunction
-
 let g:lightline.tab_component_function = {
         \ 'filename': 'lightline#tab#filename',
         \ 'absolutepath': 'Lightline_Tab_Absolutepath',
@@ -320,7 +320,6 @@ let g:lightline.tab_component_function = {
 let g:lightline.tab = {
     \ 'active': [ 'tabnum', 'absolutepath', 'modified' ],
     \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }
-
 
 " 使用NERD 字体下的图标显示
 if has('gui_running')
@@ -383,3 +382,7 @@ let g:PaperColor_Theme_Options = {
   \     }
   \   }
   \ }
+
+"let g:tagbar_width = 30
+"let g:tagbar_left = 1
+nnoremap <silent> <F9> :TagbarToggle<CR>
