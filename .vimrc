@@ -22,16 +22,16 @@ Plug 'maximbaz/lightline-ale'                              " 在右下角显示 
 Plug 'xolox/vim-misc'                                      " 一些补充函数
 Plug 'xolox/vim-session'                                   " Session Manager
 Plug 'tomasr/molokai'                                      " monokai 配色
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
                                                            " Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'                               " statusline 插件
-Plug 'skywind3000/asyncrun.vim'                            " 异步运行插件
-Plug 'skywind3000/vimmake'
-"Plug 'mileszs/ack.vim'                                     " ack - search it.
-Plug 'mhinz/vim-grepper'
+" Plug 'skywind3000/asyncrun.vim'                            " 异步运行插件
+"Plug 'skywind3000/vimmake'
+Plug 'mileszs/ack.vim'                                     " ack - search it.
+" Plug 'mhinz/vim-grepper'
 Plug 'Yggdroot/LeaderF'                                    " fuzzy jumping plugin
 Plug 'tpope/vim-fugitive'                                  " git plugin
-Plug 'mhinz/vim-signify'                                   " 在 git 仓库下文件里，在更改行左边显示标志
+"Plug 'mhinz/vim-signify'                                   " 在 git 仓库下文件里，在更改行左边显示标志
                                                            " Plug 'vim-scripts/gtags.vim'              " 这个太老了，自行去 GNU Global下载
 "Plug 'ivechan/gtags.vim'                                   " gtags 插件
 Plug 'ludovicchabant/vim-gutentags'                        " 自动管理 gtags/ctags 的插件
@@ -43,7 +43,6 @@ Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
 Plug 'hdima/python-syntax'                                 " 增强对 Python 语法支持
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
 Plug 'lervag/vimtex'
-Plug 'rakr/vim-one'
 Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
@@ -68,7 +67,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " true color and colorscheme UI and font
 let python_highlight_all = 1
 
 set termguicolors              " true color and colorscheme UI and font
-set background=dark
+set background=light
 set guioptions=0               " 不需要一些 gui，影响可视区域
 set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 colorscheme PaperColor            " 最好的颜色方案
@@ -76,7 +75,7 @@ colorscheme PaperColor            " 最好的颜色方案
 "set iskeyword-=_               " 让vim把vim当成分隔符
 set fileformat=unix
 set history=2000               " 最大2000条历史，够用了吧？
-set autoread                   " 　文件修改后自动载入
+set autoread<                " 　文件修改后自动载入
 set laststatus=2               " Always display the statusline in all windows
 set showtabline=2              " Always display the tabline, even if there is only one tab
 set noshowmode                 " Hide the default mode text (e.g. -- INSERT -- below the statusline), also for echodoc setting
@@ -89,6 +88,7 @@ set shiftround                 " >> indents to next multiple of 'shiftwidth'
 set cursorline                 " 突出显示
 set nobackup                   " no backup
 set swapfile                 " now swapfile
+set directory=~/.cache/swapfiles//
 set undofile
 set undodir=~/.cache/undodir
 set encoding=utf-8             " set default encoding
@@ -97,7 +97,7 @@ set ruler                      " 在右下角显示当前光标所在位置（�
 set scrolloff=3                " 至少保留在屏幕的行数
 set number                     " print the line number in front of each line
 set wildmenu                   " 在命令行上面显示候选项
-set wildmode=full
+set wildmode=list:longest,full
 set visualbell
 set ignorecase
 set smartcase
@@ -121,14 +121,39 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+cnoremap <C-w> <S-Right>
+cnoremap <C-b> <S-Left>
+cnoremap <C-l> <Right>
+cnoremap <C-h> <Left>
+cnoremap <C-j> <End>
+cnoremap <C-k> <Home>
 set shortmess+=c " dot't give ins-completion-menu message
 
 " AsyncRun
 "let g:asyncrun_open = 6 " set the quickfix window 6 lines height.
 "let g:asyncrun_bell = 1 " ring the bell to notify you job finished
 " F10 or m-q to toggle quickfix window
-nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
-nnoremap <M-q> :call asyncrun#quickfix_toggle(6)<cr>
+"nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+"nnoremap <M-q> :call asyncrun#quickfix_toggle(6)<cr>
+" toggles the quickfix window.
+let g:Quickfix_Win_Height=10
+command -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+  if exists("g:qfix_win") && a:forced == 0
+    cclose
+  else
+    execute "copen " . g:Quickfix_Win_Height
+  endif
+endfunction
+
+" used to track the quickfix window
+augroup QFixToggle
+ autocmd!
+ autocmd BufWinEnter quickfix let g:qfix_win = bufnr("$")
+ autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
+augroup END
+nnoremap <M-q> :call QFixToggle(0)<cr>
+
 " F5 运行当前文件， F9 编译
 "nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 "nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
@@ -167,11 +192,11 @@ map gz# <Plug>(asterisk-gz#)
 "if executable('ag')
 "  let g:ackprg = 'ag --vimgrep'
 "endif
-"if executable('rg')
-"  let g:ackprg = 'rg -H --no-heading --vimgrep'
-"endif
+if executable('rg')
+  let g:ackprg = 'rg -H --no-heading --vimgrep --smart-case'
+endif
 "cnoreabbrev Ack Ack!
-"nnoremap <Leader>a :Ack!<Space>
+nnoremap <Leader>a :Ack!<Space>
 
 " Session Plugin Config
 :let g:session_autosave = 'no' " 不自动保存session
@@ -180,7 +205,7 @@ map gz# <Plug>(asterisk-gz#)
 let g:airline#extensions#ale#enabled = 0 " 使用lightline，所以关闭airline支持
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
-let g:ale_linters = {'python': ['pylint'], 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder']} 
+let g:ale_linters = {'python': ['pylint'], 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder'], 'tex':['chktex']} 
 let g:ale_lint_on_text_changed = 'never' " 仅在打开文件和保存的时候 Lint 
 let g:ale_lint = 1
 " ALE 快捷键快速跳转
@@ -248,8 +273,8 @@ let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 "let g:Gtags_Close_When_Single=1 " when single and jump
 
 " vim-preview 快捷键
-autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
-autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+" autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+" autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
 " 自动启动echodoc
 let g:echodoc#enable_at_startup=1
@@ -275,6 +300,7 @@ endif
 
 "lightline configuration
 let g:lightline = {
+      \ 'colorscheme': 'PaperColor',
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
       \ },
@@ -298,7 +324,7 @@ let g:lightline.component_type = {
 let g:lightline.active = {
     \ 'left': [ [ 'mode', 'paste' ],
     \           ['gitbranch', 'readonly', 'filename', 'modified' ],
-    \           ['tagbar']
+    \           []
     \         ],
     \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings'],
     \            [ 'lineinfo' ],
@@ -389,9 +415,59 @@ let g:PaperColor_Theme_Options = {
 nnoremap <silent> <F9> :TagbarToggle<CR>
 
 
-" Grepper
-"let g:grepper = {}
-"let g:grepper.tools =  ['rg','git']
-nnoremap <leader>g :Grepper -tool rg<cr>
-nnoremap <leader>a :Grepper -tool rg<cr>
-nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
+
+" Vimtex
+let g:vimtex_compiler_method = 'latexmk'
+
+let g:vimtex_compiler_latexmk = {
+    \ 'backend' : "jobs",
+    \ 'background' : 1,
+    \ 'build_dir' : './build',
+    \ 'callback' : 0,
+    \ 'continuous' : 1,
+    \ 'executable' : 'latexmk',
+    \ 'options' : [
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+    \}
+let g:vimtex_compiler_latexmk_engines = {
+    \ '_'                : '-xelatex',
+    \ 'pdflatex'         : '-pdf',
+    \ 'lualatex'         : '-lualatex',
+    \ 'xelatex'          : '-xelatex',
+    \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+    \ 'context (luatex)' : '-pdf -pdflatex=context',
+    \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+    \}
+if !exists('g:ycm_semantic_triggers')
+let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+"let g:vimtex_view_general_viewer = 'mupdf'
+let g:vimtex_view_general_viewer = 'SumatraPDF'
+let g:vimtex_view_general_options
+    \ = '-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
+let g:vimtex_compiler_callback_hooks = ['Latexmk_task_done']
+"let g:vimtex_compiler_latexmk = {'callback' : 0}
+
+function! Latexmk_task_done(status)
+    if a:status == 1
+        echom "LaTeX compilation succeeded."
+    elseif a:status == 0
+        echom "LaTeX compilation failed."
+    else
+        echom "Unkown status."
+    endif
+endfunction
+
+"let $success_cmd = 'gvim.exe --remote-expr "vimtex#compiler#callback(1)"'
+"let $success_cmd = 'cl-2-dde-1.0.exe @= =SUMATRA= =control= =[Open("%bm.pdf",0,1,1)]='
+"let $failure_cmd = 'gvim.exe --remote-expr "vimtex#compiler#callback(0)"'
+
+let g:vimtex_compiler_progname=v:progname
+"set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
