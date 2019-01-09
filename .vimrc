@@ -1,6 +1,6 @@
 call plug#begin('~/vim/plugged')
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }     " 文件浏览器
-"Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' } " just one nerdtree
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }     " 文件浏览器
+Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeToggle' } " just one nerdtree
 "Plug 'ryanoasis/vim-devicons'                              " 使用 NERD 字体让 vim 能显示图标
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-surround'                                  " 更方便地使用括号，引号等成对出现的符号
@@ -22,7 +22,9 @@ Plug 'maximbaz/lightline-ale'                              " 在右下角显示 
 Plug 'xolox/vim-misc'                                      " 一些补充函数
 Plug 'xolox/vim-session'                                   " Session Manager
 Plug 'tomasr/molokai'                                      " monokai 配色
+Plug 'dyng/ctrlsf.vim'
 " Plug 'majutsushi/tagbar'
+
                                                            " Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'                               " statusline 插件
 " Plug 'skywind3000/asyncrun.vim'                            " 异步运行插件
@@ -37,13 +39,16 @@ Plug 'tpope/vim-fugitive'                                  " git plugin
 Plug 'ludovicchabant/vim-gutentags'                        " 自动管理 gtags/ctags 的插件
 Plug 'skywind3000/gutentags_plus'                          " 在多项目里管理 tags 生成，不过 bug 多
 Plug 'skywind3000/vim-preview'                             " 同上
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
                                                            " Plug 'nathanaelkane/vim-indent-guides'    " 显示 indent，不过一般不用
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
 Plug 'hdima/python-syntax'                                 " 增强对 Python 语法支持
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
 Plug 'lervag/vimtex'
 Plug 'NLKNguyen/papercolor-theme'
+
+"
+Plug 'ivechan/taggy'
 call plug#end()
 
 let mapleader = ' '          " change leader key to <space>
@@ -51,7 +56,8 @@ let g:mapleader = ' '        " change leader key to <space>
 
 syntax enable
 filetype plugin indent on          
-runtime macros/matchit.vim " enhanced matching
+packadd! matchit
+"packadd! taggy
 set nocompatible
 
 
@@ -67,14 +73,16 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " true color and colorscheme UI and font
 let python_highlight_all = 1
 
 set termguicolors              " true color and colorscheme UI and font
-set background=light
+set background=dark
 set guioptions=0               " 不需要一些 gui，影响可视区域
 set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
-colorscheme PaperColor            " 最好的颜色方案
+"colorscheme PaperColor            " 最好的颜色方案
+let g:molokai_original = 1
+colorscheme molokai
 
 "set iskeyword-=_               " 让vim把vim当成分隔符
 set fileformat=unix
-set history=2000               " 最大2000条历史，够用了吧？
+set history=200               " 最大2000条历史，够用了吧？
 set autoread<                " 　文件修改后自动载入
 set laststatus=2               " Always display the statusline in all windows
 set showtabline=2              " Always display the tabline, even if there is only one tab
@@ -94,10 +102,16 @@ set undodir=~/.cache/undodir
 set encoding=utf-8             " set default encoding
 set autoindent                 " 自动缩进
 set ruler                      " 在右下角显示当前光标所在位置（行列）
+set showcmd		" display incomplete commands
 set scrolloff=3                " 至少保留在屏幕的行数
 set number                     " print the line number in front of each line
 set wildmenu                   " 在命令行上面显示候选项
-set wildmode=list:longest,full
+set spell
+setlocal spell spelllang=en_us
+
+"set wildmode=list:longest,full
+" Show @@@ in the last line if it is truncated.
+set display=truncate
 set visualbell
 set ignorecase
 set smartcase
@@ -107,9 +121,18 @@ set hlsearch                   " highlight search result
 set textwidth=80
 set colorcolumn=80
 set backspace=indent,eol,start
+set dictionary+=~/vimfiles/scowl/wordlist
 
 set wildignore+=.o,*.bak,*~,*.sw?,*.aux,*.toc,*.git,*.svn,*.so,*.a,*.pyc,*.aux,*.toc,*.exe " 隐藏一些自动生成的文件
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
 
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+" Revert with ":iunmap <C-U>".
+inoremap <C-U> <C-G>u<C-U>
 nnoremap j gj
 nnoremap k gk
 inoremap <F1> <ESC> " 防止F1误触
@@ -117,6 +140,7 @@ nnoremap <F1> <ESC> " F1误触
 vnoremap <F1> <ESC> " F1误触
 inoremap jj <ESC>
 nnoremap <leader>v <C-w>v<C-w>l
+nnoremap <leader>c :CD<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -137,7 +161,7 @@ set shortmess+=c " dot't give ins-completion-menu message
 "nnoremap <M-q> :call asyncrun#quickfix_toggle(6)<cr>
 " toggles the quickfix window.
 let g:Quickfix_Win_Height=10
-command -bang -nargs=? QFix call QFixToggle(<bang>0)
+command! -bang -nargs=? QFix call QFixToggle(<bang>0)
 function! QFixToggle(forced)
   if exists("g:qfix_win") && a:forced == 0
     cclose
@@ -149,8 +173,8 @@ endfunction
 " used to track the quickfix window
 augroup QFixToggle
  autocmd!
- autocmd BufWinEnter quickfix let g:qfix_win = bufnr("$")
- autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
+ au! BufWinEnter quickfix let g:qfix_win = bufnr("$")
+ au! BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
 augroup END
 nnoremap <M-q> :call QFixToggle(0)<cr>
 
@@ -165,14 +189,11 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{}', '}']]
 let g:rainbow#blacklist = [233, 234]
 
 " Leaderf
-nnoremap <M-p> :LeaderfFunction<CR>
-nnoremap <Leader>p :LeaderfBufTag<CR>
+nnoremap <M-p> :Leaderf! --fullScreen function<CR>
+nnoremap <Leader>p :Leaderf! --fullScreen bufTag<CR>
 nnoremap <M-m> :LeaderfMru<Enter>
 " nnoremap <Leader>t :LeaderfTag<CR>
 nnoremap <Leader>l :LeaderfLine<CR>
-nnoremap <Leader>t :TagbarToggle<CR>
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " asterisk setting
 let g:asterisk#keeppos = 1
@@ -189,14 +210,12 @@ map gz# <Plug>(asterisk-gz#)
 
 
 " ag
-"if executable('ag')
-"  let g:ackprg = 'ag --vimgrep'
-"endif
 if executable('rg')
   let g:ackprg = 'rg -H --no-heading --vimgrep --smart-case'
 endif
 "cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
+"nnoremap <Leader>a :Ack!<Space>
+nnoremap <Leader>a :Leaderf rg -S -e<Space>
 
 " Session Plugin Config
 :let g:session_autosave = 'no' " 不自动保存session
@@ -205,7 +224,9 @@ nnoremap <Leader>a :Ack!<Space>
 let g:airline#extensions#ale#enabled = 0 " 使用lightline，所以关闭airline支持
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
-let g:ale_linters = {'python': ['pylint'], 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder'], 'tex':['chktex']} 
+let g:ale_linters = {'python': ['pylint'], 
+            \ 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder'],
+            \ 'tex':['chktex', 'lacheck'] }
 let g:ale_lint_on_text_changed = 'never' " 仅在打开文件和保存的时候 Lint 
 let g:ale_lint = 1
 " ALE 快捷键快速跳转
@@ -272,9 +293,6 @@ let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 "let Gtags_No_Auto_Jump=1
 "let g:Gtags_Close_When_Single=1 " when single and jump
 
-" vim-preview 快捷键
-" autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
-" autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
 " 自动启动echodoc
 let g:echodoc#enable_at_startup=1
@@ -290,7 +308,7 @@ let g:UltiSnipsEditSplit="vertical"
 " enable directwrite renderoption in windows
 if has('win32') 
     if !has('nvim')
-        set renderoptions=type:directx,renmode:5,taamode:1
+        set renderoptions=type:directx,renmode:0,taamode:1
     endif
 endif
 
@@ -300,14 +318,16 @@ endif
 
 "lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
+      \ 'colorscheme': 'powerline',
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
       \ },
       \ 'component': {
       \  'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
+      \  'taggy': '%{Taggy_Get_Current_Tag()}',
       \  },
       \ }
+      "\  'taggy': '%{Taggy_Get_Current_Tag()}',
 " 在右下角显示 Linting状态
 let g:lightline.component_expand = {
       \  'linter_checking': 'lightline#ale#checking',
@@ -324,7 +344,7 @@ let g:lightline.component_type = {
 let g:lightline.active = {
     \ 'left': [ [ 'mode', 'paste' ],
     \           ['gitbranch', 'readonly', 'filename', 'modified' ],
-    \           []
+    \           ['taggy']
     \         ],
     \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings'],
     \            [ 'lineinfo' ],
@@ -371,7 +391,7 @@ nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 "nnoremap <C-\><C-]> :GtagsCursorAndJump<CR>
 
-"nnoremap <M-n> :NERDTreeToggle<CR>
+nnoremap <F10> :NERDTreeToggle<CR>
 
 " set working directory to git project root
 " or directory of current file if not git project
@@ -434,7 +454,7 @@ let g:vimtex_compiler_latexmk = {
     \ ],
     \}
 let g:vimtex_compiler_latexmk_engines = {
-    \ '_'                : '-xelatex',
+    \ '_'                : '-pdf',
     \ 'pdflatex'         : '-pdf',
     \ 'lualatex'         : '-lualatex',
     \ 'xelatex'          : '-xelatex',
@@ -465,9 +485,16 @@ function! Latexmk_task_done(status)
     endif
 endfunction
 
-"let $success_cmd = 'gvim.exe --remote-expr "vimtex#compiler#callback(1)"'
-"let $success_cmd = 'cl-2-dde-1.0.exe @= =SUMATRA= =control= =[Open("%bm.pdf",0,1,1)]='
-"let $failure_cmd = 'gvim.exe --remote-expr "vimtex#compiler#callback(0)"'
 
 let g:vimtex_compiler_progname=v:progname
 "set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+let g:Lf_PreviewResult = { 'BufTag': 0 }
+
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+command! -nargs=0 DeleteHiddenBuffers call DeleteHiddenBuffers()
