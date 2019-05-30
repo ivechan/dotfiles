@@ -1,4 +1,4 @@
-call plug#begin('~/vimplug/plugged')
+call plug#begin('~/.vimplug/plugged')
 Plug 'scrooloose/nerdtree'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'jistr/vim-nerdtree-tabs'
@@ -13,67 +13,103 @@ Plug 'easymotion/vim-easymotion'                           " easymotion
 Plug 'gaving/vim-textobj-argument'                         " argument text-object support
 Plug 'wellle/targets.vim'                                  " provides additional text objects
 Plug 'junegunn/rainbow_parentheses.vim'                    " rainbow parentheses
-Plug 'haya14busa/vim-asterisk'                             " enhanced asterisk *
+"Plug 'haya14busa/vim-asterisk'                             " enhanced asterisk *
 Plug 'tpope/vim-repeat'                                    " repeat for vim-surround
 Plug 'tpope/vim-unimpaired'                                " Pairs of handy bracket mappings
 Plug 'godlygeek/tabular'                                   " 更简单地对齐
+" Plug 'vhdirk/vim-cmake'
+" Plug 'pboettch/vim-cmake-syntax'
+" Plug 'neomake/neomake'
 Plug 'SirVer/ultisnips'                                    " snippets框架
 Plug 'ivechan/vim-snippets'                                " 具体某个语言的snippets, 自定义
 Plug 'valloric/youcompleteme'                              " 补全框架
 Plug 'ivechan/echodoc.vim'                                  " 补全的时候，在 statusline 显示函数原型
 Plug 'tpope/vim-commentary'                                " 使用 gc 来注释
-"Plug 'w0rp/ale'                                            " 异步代码检查 (Linting) 框架
+ Plug 'w0rp/ale'                                            " 异步代码检查 (Linting) 框架
 Plug 'maximbaz/lightline-ale'                              " 在右下角显示 linting 状态
+Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-gruvbox8'
 Plug 'xolox/vim-misc'                                      " 一些补充函数
 Plug 'xolox/vim-session'                                   " Session Manager
 Plug 'ivechan/molokai'                                      " monokai 配色
 "Plug 'dyng/ctrlsf.vim'
 "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'rstacruz/vim-closer'
+" Plug 'rstacruz/vim-closer'
 Plug 'airblade/vim-rooter'
+Plug 'szymonmaszke/vimpyter'
+Plug 'rakr/vim-one'
+Plug 'lifepillar/vim-gruvbox8'
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
+" Plug 'iamcco/sran.nvim', { 'do': { -> sran#util#install() } }
+" Plug 'iamcco/git-p.nvim'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+" Plug 'ncm2/ncm2'
+" Plug 'ncm2/ncm2-ultisnips'
+" Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2-markdown-subscope'
+" Plug 'ncm2/ncm2-bufword'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-syntax'
+" Plug 'Shougo/neco-syntax'
+" Plug 'fgrsnau/ncm2-otherbuf'
+" Plug '~/projects/ncm2-jedi'
+" "Plug 'ncm2/ncm2-jedi'
+" Plug 'ncm2/ncm2-pyclang'
+" Plug 'ncm2/float-preview.nvim'
+"Plug 'ncm2/ncm2-match-highlight'
+Plug 'romainl/flattened'
 
-                                                           " Plug 'morhetz/gruvbox'
+"Xmake
+" Plug 'luzhlon/x.vim'
+" Plug 'luzhlon/qrun.vim'
+" Plug 'luzhlon/xmake.vim'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'                               " statusline 插件
 Plug 'skywind3000/asyncrun.vim'                            " 异步运行插件
 "Plug 'skywind3000/vimmake'
 Plug 'mileszs/ack.vim'                                     " ack - search it.
 " Plug 'mhinz/vim-grepper'
-Plug 'Yggdroot/LeaderF'                                    " fuzzy jumping plugin
+" Plug 'Yggdroot/LeaderF'                                    " fuzzy jumping plugin
 Plug 'tpope/vim-fugitive'                                  " git plugin
 "Plug 'mhinz/vim-signify'                                   " 在 git 仓库下文件里，在更改行左边显示标志
 "Plug 'airblade/vim-gitgutter'
-                                                           " Plug 'vim-scripts/gtags.vim'              " 这个太老了，自行去 GNU Global下载
+Plug 'dracula/vim'
+" Plug 'vim-scripts/gtags.vim'              " 这个太老了，自行去 GNU Global下载
 "Plug 'ivechan/gtags.vim'                                   " gtags 插件
 Plug 'ludovicchabant/vim-gutentags'                        " 自动管理 gtags/ctags 的插件
 Plug 'skywind3000/gutentags_plus'                          " 在多项目里管理 tags 生成，不过 bug 多
-Plug 'skywind3000/vim-preview'                             " 同上
+" Plug 'skywind3000/vim-preview'                             " 同上
 "Plug 'jiangmiao/auto-pairs'
                                                            " Plug 'nathanaelkane/vim-indent-guides'    " 显示 indent，不过一般不用
-Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
+" Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
 Plug 'hdima/python-syntax'                                 " 增强对 Python 语法支持
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
 Plug 'lervag/vimtex'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'haishanh/night-owl.vim'
 Plug 'cocopon/iceberg.vim'
-
-"
-Plug 'ivechan/taggy'
+"Plug 'ivechan/taggy'
 call plug#end()
+call glaive#Install()
+
 
 let mapleader = ' '          " change leader key to <space>
 let g:mapleader = ' '        " change leader key to <space>
 
 syntax enable
 filetype plugin indent on          
-packadd! matchit
+"packadd! matchit
 "packadd! taggy
 set nocompatible
 
 
-set langmenu=en_US  " 将 vim 语言设置为 en,主要应对中文环境下乱码问题
-let $LANG='en'
-source $VIMRUNTIME/delmenu.vim 
-source $VIMRUNTIME/menu.vim
+" set clipboard+=unnamedplus
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " true color and colorscheme UI and font
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " true color and colorscheme UI and font
@@ -81,19 +117,24 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " true color and colorscheme UI and font
 
 let python_highlight_all = 1
 
+"set t_Co=256
 set termguicolors              " true color and colorscheme UI and font
-set background=dark
 set guioptions=0               " 不需要一些 gui，影响可视区域
 "set guifont=Fira\ Mono:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 "set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
-"colorscheme PaperColor            " 最好的颜色方案
-let g:molokai_original = 1
-colorscheme PaperColor
-
+set background=dark
+"colorscheme flattened_light
+colorscheme iceberg
+"colorscheme night-owl
 "set iskeyword-=_               " 让vim把vim当成分隔符
 set fileformat=unix
 set ff=unix
+set fileencoding=utf-8
+"set langmenu=en_US  " 将 vim 语言设置为 en,主要应对中文环境下乱码问题
+"let $LANG='en'
+source $VIMRUNTIME/delmenu.vim 
+source $VIMRUNTIME/menu.vim
 set history=200               " 最大2000条历史，够用了吧？
 set autoread<                " 　文件修改后自动载入
 set laststatus=2               " Always display the statusline in all windows
@@ -103,12 +144,12 @@ set tabstop=4                  " show existing tab with 4 space width
 set shiftwidth=4               " when indenting with '>' , using 4 space width
 set expandtab                  " on pressing tab, insert 4 spaces
 set hidden
-set shiftwidth =4              " >> indents by 4 spaces.
+set shiftwidth=4              " >> indents by 4 spaces.
 set shiftround                 " >> indents to next multiple of 'shiftwidth'
-set cursorline                 " 突出显示
+" set cursorline                 " 突出显示
 set nobackup                   " no backup
 set noswapfile                 " now swapfile
-set directory=~/.cache/swapfiles//
+"set directory=~/.cache/swapfiles//
 set undofile
 set undodir=~/.cache/undodir
 set encoding=utf-8             " set default encoding
@@ -125,7 +166,6 @@ set updatetime=300
 "set wildmode=list:longest,full
 " Show @@@ in the last line if it is truncated.
 set display=truncate
-set visualbell
 set ignorecase
 set smartcase
 set gdefault                   " 在substitute命令的时候，默认执行整行内的匹配项而不是一个
@@ -136,7 +176,7 @@ set colorcolumn=80
 set backspace=indent,eol,start
 set dictionary+=~/vimfiles/scowl/wordlist
 
-set wildignore+=.o,*.bak,*~,*.sw?,*.aux,*.toc,*.git,*.svn,*.so,*.a,*.pyc,*.aux,*.toc,*.exe,*.pb " 隐藏一些自动生成的文件
+set wildignore+=.o,*.bak,*~,*.sw?,*.aux,*.toc,*.git,*.svn,*.so,*.a,*.pyc,*.aux,*.toc,*.exe,*.pb,.ccls-cache/,*.ccls-cache " 隐藏一些自动生成的文件
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
@@ -153,8 +193,6 @@ nnoremap <F1> <ESC> " F1误触
 vnoremap <F1> <ESC> " F1误触
 inoremap jj <ESC>
 nnoremap <leader>v <C-w>v<C-w>l
-nnoremap <leader>c :CD<CR>
-nnoremap <leader>t :tabnew<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -222,9 +260,6 @@ function! LocWindowToggle()
     endif
 endfunction
 nnoremap <M-l> :call LocWindowToggle()<cr>
-" F5 运行当前文件， F9 编译
-"nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
-"nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " parentheses color
 au VimEnter * RainbowParentheses
@@ -233,237 +268,298 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{}', '}']]
 let g:rainbow#blacklist = [233, 234]
 
 " Leaderf
-nnoremap <M-p> :Leaderf! --fullScreen function<CR>
-nnoremap <Leader>p :Leaderf! --fullScreen bufTag<CR>
-nnoremap <M-m> :LeaderfMru<Enter>
+" nnoremap <M-p> :Leaderf --fullScreen function<CR>
+"nnoremap <M-b> :Leaderf! --fullScreen bufTag<CR>
+" nnoremap <M-m> :LeaderfMru<Enter>
 " nnoremap <Leader>t :LeaderfTag<CR>
-nnoremap <Leader>l :LeaderfLine<CR>
+" nnoremap <Leader>l :LeaderfLine<CR>
+let g:Lf_ShortcutB = "<M-b>"
 
 " asterisk setting
 let g:asterisk#keeppos = 1
 nnoremap s <Plug>(easymotion-s2)
 nnoremap t <Plug>(easymotion-t2)
-"map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-z#)
-map g*  <Plug>(asterisk-g*)
-map g#  <Plug>(asterisk-g#)
-map *  <Plug>(asterisk-z*)
-map gz* <Plug>(asterisk-gz*)
-map z#  <Plug>(asterisk-z#)
-map gz# <Plug>(asterisk-gz#)
+" "map *   <Plug>(asterisk-*)
+" map #   <Plug>(asterisk-z#)
+" map g*  <Plug>(asterisk-g*)
+" map g#  <Plug>(asterisk-g#)
+" map *  <Plug>(asterisk-z*)
+" map gz* <Plug>(asterisk-gz*)
+" map z#  <Plug>(asterisk-z#)
+" map gz# <Plug>(asterisk-gz#)
 
 
 " ag
-if executable('rg')
-  let g:ackprg = 'rg -H --no-heading --vimgrep --smart-case'
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
 endif
 "cnoreabbrev Ack Ack!
 "nnoremap <Leader>a :Ack!<Space>
-nnoremap <Leader>a :Leaderf rg -S -e<Space>
+"nnoremap <Leader>a :Leaderf rg -S -e<Space>
 
+
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>fl :BLines<CR>
+nnoremap <leader>fm :Marks<CR>
+nnoremap <leader>fw :Windows<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>fd :GFiles?<CR>
+nnoremap <leader>ft :Tags?<CR>
+nnoremap <leader>fp :BTags<CR>
+nnoremap <leader>fa :Ag<CR>
+
+nnoremap <leader>g :GFiles<CR>
+nnoremap <leader>gg :GFiles<CR>
+nnoremap <leader>gd :GFiles?<CR>
+nnoremap <leader>gp :Gpush
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit<Space>
+nnoremap <leader>m :FZFMru<CR>
+nnoremap <M-m> :FZFMru<CR>
+let g:fzf_buffers_jump = 1
+let g:fzf_tags_command = 'ctags -R'
+function! s:ag_with_opts(arg, bang)
+  let tokens  = split(a:arg)
+  let ag_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
+  let query   = join(filter(copy(tokens), 'v:val !~ "^-"'))
+  call fzf#vim#ag(query, ag_opts, a:bang ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), a:bang)
+endfunction
+
+function! s:rg_with_opts(arg, bang)
+  let tokens  = split(a:arg)
+  let rg_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
+  let query   = join(filter(copy(tokens), 'v:val !~ "^-"'))
+  call fzf#vim#grep(query, rg_opts, a:bang ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), a:bang)
+endfunction
+
+autocmd VimEnter * command! -nargs=* -bang Ag call s:ag_with_opts(<q-args>, <bang>0)
+"autocmd VimEnter * command! -nargs=* -bang Rg call s:rg_with_opts(<q-args>, <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+\ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+\ 'bg':      ['bg', 'Normal'],
+\ 'hl':      ['fg', 'Comment'],
+\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+\ 'hl+':     ['fg', 'Statement'],
+\ 'info':    ['fg', 'PreProc'],
+\ 'border':  ['fg', 'Ignore'],
+\ 'prompt':  ['fg', 'Conditional'],
+\ 'pointer': ['fg', 'Exception'],
+\ 'marker':  ['fg', 'Keyword'],
+\ 'spinner': ['fg', 'Label'],
+\ 'header':  ['fg', 'Comment'] }
+nnoremap <Leader>a :Ag<Space>
+nnoremap <Leader>a :Rg<Space>
+nnoremap <Leader>r :Rg<Space>
+nnoremap <Leader>; :
+nnoremap <Leader>j :
 " Session Plugin Config
 :let g:session_autosave = 'no' " 不自动保存session
 
-" ale
-let g:airline#extensions#ale#enabled = 0 " 使用lightline，所以关闭airline支持
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-let g:ale_sign_column_always = 0
-let g:ale_set_signs = 0
+    " ale
+    let g:airline#extensions#ale#enabled = 0 " 使用lightline，所以关闭airline支持
+    let g:ale_sign_error = '>>'
+    let g:ale_sign_warning = '--'
+    let g:ale_sign_column_always = 1
+    let g:ale_set_signs = 1
 
-"\ 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder'],
-let g:ale_linters = {'python': ['pylint'], 
-            \ 'tex':['chktex', 'lacheck'] }
-let g:ale_lint_on_text_changed = 'never' " 仅在打开文件和保存的时候 Lint 
-let g:ale_lint = 1
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-" ALE 快捷键快速跳转
-nmap <silent> <M-k> <Plug>(ale_previous_wrap) 
-nmap <silent> <M-j> <Plug>(ale_next_wrap)
+    "\ 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder'],
+    let g:ale_linters = {'python': ['flake8'], 
+                \ 'tex':['chktex', 'lacheck'] }
+    " let g:ale_lint_on_text_changed = 'never' " 仅在打开文件和保存的时候 Lint 
+    let g:ale_lint = 1
+    let g:ale_set_loclist = 1
+    let g:ale_set_quickfix = 0
+    " ALE 快捷键快速跳转
+    nmap <silent> <M-k> :lprevious<CR>
+    nmap <silent> <M-j> :lnext<CR>
 
-" YCM 设置
-let g:ycm_key_invoke_completion = '<C-x><C-o>'
-let g:ycm_add_preview_to_completeopt = 0 " preview窗口影响布局
-let g:ycm_show_diagnostics_ui = 0 " 已经有更好的ALE
-set completeopt=menu,menuone
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_complete_in_strings=1
-let g:ycm_python_binary_path = 'python'
-let g:ycm_auto_trigger=1
-let g:ycm_max_num_candidates = 30
-nnoremap <leader>jd :YcmCompleter GoTo<CR> 
-nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR> 
-nnoremap <leader>jf :YcmCompleter GoToDefinition<CR> 
-nnoremap <leader>jr :YcmCompleter GoToReferences<CR> 
-nnoremap <leader>jk :YcmCompleter GetDoc<CR> 
+    " YCM 设置
+    let g:ycm_key_invoke_completion = '<C-x><C-o>'
+    let g:ycm_add_preview_to_completeopt = 0 " preview窗口影响布局
+    let g:ycm_show_diagnostics_ui = 0 " 已经有更好的ALE
+    " set completeopt=menu,menuone
+    let g:ycm_min_num_of_chars_for_completion = 1
+    " let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    let g:ycm_seed_identifiers_with_syntax = 1
+    let g:ycm_use_ultisnips_completer = 1
 
-
-
-" tags setting
-
-" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_modules = ['ctags', 'gtags_cscope']
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
-" 禁止插件自动加载gtags数据库，用plus插件来控制
-let g:gutentags_auto_add_gtags_cscope = 0
-noremap <silent> <leader>cs :GscopeFind s <C-R><C-W><cr>
-noremap <silent> <leader>cg :GscopeFind g <C-R><C-W><cr>
-noremap <silent> <leader>cc :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>ct :GscopeFind t <C-R><C-W><cr
-noremap <silent> <leader>ca :GscopeFind a <C-R><C-W><cr>
-noremap <silent> <leader>cd :GscopeFind d <C-R><C-W><cr>
-
-let g:gutentags_plus_nomap = 1
-
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
-
-" 检测 ~/.cache/tags 不存在就新建
-if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
-endif
-
-" gtags 配置
-" https://www.gnu.org/software/global/
-let $GTAGSLABEL = 'native-pygments'
-"let $GTAGSLABEL = 'new-ctags'
-
-if has('win32')
-    let $GTAGSCONF = 'C:\Users\lhche\gtags.conf' "必须重新配置
-else
-    let $GTAGSCONF = '/home/jing/gtags.conf'
-endif
-let gutentags_define_advanced_commands = 1
-" 配置 ctags 的参数 https://github.com/universal-ctags/ctags
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px-d']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px-d']
-let g:gutentags_ctags_extra_args += ['--output-format=etags']
-"let g:gutentags_ctags_extra_args += ['--exclude=@.gitignore']
-"let g:gutentags_ctags_extra_args += ['--exclude=@.ignore']
-"let Gtags_No_Auto_Jump=1
-"let g:Gtags_Close_When_Single=1 " when single and jump
+    " let g:ycm_complete_in_strings=1
+    " let g:ycm_python_binary_path = 'python'
+    " let g:ycm_auto_trigger=1
+    " let g:ycm_max_num_candidates = 30
+    " Let clangd fully control code completion
+    let g:ycm_clangd_uses_ycmd_caching = 0
+    " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+    " let g:ycm_clangd_binary_path = exepath("clangd")j
+    nnoremap <leader>jd :YcmCompleter GoTo<CR> 
+    " nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR> 
+    " nnoremap <leader>jf :YcmCompleter GoToDefinition<CR> 
+    " nnoremap <leader>jr :YcmCompleter GoToReferences<CR> 
+    " nnoremap <leader>jk :YcmCompleter GetDoc<CR> 
 
 
-" 自动启动echodoc
-let g:echodoc#enable_at_startup=1
-" 启用 python 高亮
-"let python_highlight_all = 1
 
-" UltiSnip插件
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit="vertical"
+    " tags setting
 
-" enable directwrite renderoption in windows
-if has('win32') 
-    if !has('nvim')
-        set renderoptions=type:directx,renmode:0,taamode:1
+    " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+    let g:gutentags_modules = ['ctags', 'gtags_cscope']
+    let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+    " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+    let s:vim_tags = expand('~/.cache/tags')
+    let g:gutentags_cache_dir = s:vim_tags
+    " 禁止插件自动加载gtags数据库，用plus插件来控制
+    let g:gutentags_auto_add_gtags_cscope = 0
+    noremap <silent> <leader>cs :GscopeFind s <C-R><C-W><cr>
+    noremap <silent> <leader>cg :GscopeFind g <C-R><C-W><cr>
+    noremap <silent> <leader>cc :GscopeFind c <C-R><C-W><cr>
+    noremap <silent> <leader>ct :GscopeFind t <C-R><C-W><cr
+    noremap <silent> <leader>ca :GscopeFind a <C-R><C-W><cr>
+    noremap <silent> <leader>cd :GscopeFind d <C-R><C-W><cr>
+
+    let g:gutentags_plus_nomap = 1
+
+    " 所生成的数据文件的名称
+    let g:gutentags_ctags_tagfile = '.tags'
+
+    " 检测 ~/.cache/tags 不存在就新建
+    if !isdirectory(s:vim_tags)
+    silent! call mkdir(s:vim_tags, 'p')
     endif
-endif
 
-if has('nvim')
-    set inccommand=nosplit
-endif
+    " gtags 配置
+    " https://www.gnu.org/software/global/
+    let $GTAGSLABEL = 'native-pygments'
+    "let $GTAGSLABEL = 'new-ctags'
 
-"lightline configuration
-let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \   'filetype': 'MyFiletype',
-      \    'fileformat': 'MyFileformat'
-      \ },
-      \ 'component': {
-      \  'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
-      \  'taggy': '%{Taggy_Get_Current_Tag()}',
-      \  },
-      \ }
-function! MyFiletype()
-return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
+    if has('win32')
+        let $GTAGSCONF = 'C:\Users\lhche\gtags.conf' "必须重新配置
+    else
+        let $GTAGSCONF = '/home/jing/gtags.conf'
+    endif
+    let gutentags_define_advanced_commands = 1
+    " 配置 ctags 的参数 https://github.com/universal-ctags/ctags
+    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px-d']
+    let g:gutentags_ctags_extra_args += ['--c-kinds=+px-d']
+    "let g:gutentags_ctags_extra_args += ['--output-format=e-tags']
+    "let g:gutentags_ctags_extra_args += ['--exclude=@.gitignore']
+    "let g:gutentags_ctags_extra_args += ['--exclude=@.ignore']
+    "let Gtags_No_Auto_Jump=1
+    "let g:Gtags_Close_When_Single=1 " when single and jump
 
-function! MyFileformat()
-return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-  endfunction
-    "\  'taggy': '%{Taggy_Get_Current_Tag()}',
-" 在右下角显示 Linting状态
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
-let g:lightline.active = {
-    \ 'left': [ [ 'mode', 'paste' ],
-    \           ['gitbranch', 'readonly', 'filename', 'modified' ],
-    \           ['taggy']
-    \         ],
-    \ 'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings'],
-    \            [ 'lineinfo' ],
-    \            [ 'percent' ],
-    \            [ 'fileformat', 'fileencoding', 'filetype' ] ,
-    \          ]
-    \ }
-function! Lightline_Tab_Absolutepath(n) abort
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let _ = expand('#'.buflist[winnr - 1])
-  return _ !=# '' ? _ : '[No Name]'
-endfunction
-let g:lightline.tab_component_function = {
-        \ 'filename': 'lightline#tab#filename',
-        \ 'absolutepath': 'Lightline_Tab_Absolutepath',
-        \ 'modified': 'lightline#tab#modified',
-        \ 'readonly': 'lightline#tab#readonly',
-        \ 'tabnum': 'lightline#tab#tabnum' }
-let g:lightline.tab = {
-    \ 'active': [ 'tabnum', 'absolutepath', 'modified' ],
-    \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }
 
-" 使用NERD 字体下的图标显示
-if has('gui_running')
-    let g:lightline#ale#indicator_checking = "\uf110"
-    let g:lightline#ale#indicator_warnings = "\uf071"
-    let g:lightline#ale#indicator_errors = "\uf05e"
-    let g:lightline#ale#indicator_ok = "\uf00c"
-end
+    " 自动启动echodoc
+    let g:echodoc#enable_at_startup=1
+    " 启用 python 高亮
+    "let python_highlight_all = 1
 
-" autopairs快捷键会冲突，禁用掉
-let g:AutoPairsShortcutToggle = ''
-let g:AutoPairsShortcutJump=''
-let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'", '`':'`'}
+    " UltiSnip插件
+    let g:UltiSnipsExpandTrigger="<c-j>"
+    let g:UltiSnipsJumpForwardTrigger="<c-j>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+    let g:UltiSnipsEditSplit="vertical"
 
-" Gtags 快捷键
-"nnoremap <leader>g :Gtags<SPACE>
-"nnoremap <leader>c :GtagsCursor<CR>
-"nnoremap <leader>p :Gtags -f %<CR>
-"nnoremap <M-p> :Gtags -f %<CR>
+    " enable directwrite renderoption in windows
+    if has('win32') 
+        if !has('nvim')
+            set renderoptions=type:directx,renmode:0,taamode:1
+        endif
+    endif
 
-nnoremap <C-n> :cn<CR>
-nnoremap <C-p> :cp<CR>
-"nnoremap <C-\><C-]> :GtagsCursorAndJump<CR>
+    if has('nvim')
+        set inccommand=nosplit
+    endif
 
-"nnoremap <M-n> :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
-"nnoremap - :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
-"nnoremap <M-n> :Explore<cr>
-"nnoremap <M-n> :NERDTree %:p:h<CR>
-nnoremap <M-n> :NERDTreeFind<CR>
-nnoremap <F10> :NERDTreeToggle<CR>
-nnoremap <nerdtree> b :BookMarks<CR> 
+    "lightline configuration
+    let g:lightline = {
+        \ 'colorscheme': 'iceberg',
+        \ 'component_function': {
+        \   'gitbranch': 'fugitive#head',
+        \   'filetype': 'MyFiletype',
+        \   'fileformat': 'MyFileformat',
+        \ },
+        \ 'component': {
+        \  'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
+        \  'taggy': '%{Taggy_Get_Current_Tag()}',
+        \  },
+        \ 'component_expand' : {
+        \  'linter_checking': 'lightline#ale#checking',
+        \  'linter_warnings': 'lightline#ale#warnings',
+        \  'linter_errors': 'lightline#ale#errors',
+        \  'linter_ok': 'lightline#ale#ok',
+        \ }, 
+        \ 'component_type' : {
+        \     'linter_checking': 'left',
+        \     'linter_warnings': 'warning',
+        \     'linter_errors': 'error',
+        \     'linter_ok': 'left',
+        \ }
+        \ }
+
+    
+    let g:lightline.active = {
+        \ 'left': [ [ 'mode', 'paste' ],
+        \           ['readonly', 'filename', 'modified' ],
+        \           ['']
+        \         ],
+        \ 'right': [ 
+        \            ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+        \            [ 'lineinfo' ],
+        \            [ 'percent' ],
+        \            [ 'fileformat', 'fileencoding', 'filetype'] ,
+        \          ]
+        \ }
+    function! Lightline_Tab_Absolutepath(n) abort
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    let _ = expand('#'.buflist[winnr - 1])
+    return _ !=# '' ? _ . ' ' .WebDevIconsGetFileTypeSymbol(): '[No Name]'
+    endfunction
+    let g:lightline.tab_component_function = {
+            \ 'filename': 'lightline#tab#filename',
+            \ 'absolutepath': 'Lightline_Tab_Absolutepath',
+            \ 'modified': 'lightline#tab#modified',
+            \ 'readonly': 'lightline#tab#readonly',
+            \ 'tabnum': 'lightline#tab#tabnum' }
+    let g:lightline.tab = {
+        \ 'active': [ 'tabnum', 'absolutepath', 'modified' ],
+        \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }
+
+    " 使用NERD 字体下的图标显示
+       let g:lightline#ale#indicator_checking = "\uf110"
+       let g:lightline#ale#indicator_warnings = "\uf071"
+       let g:lightline#ale#indicator_errors = "\uf05e"
+       let g:lightline#ale#indicator_ok = "\uf00c"
+
+    " autopairs快捷键会冲突，禁用掉
+    let g:AutoPairsShortcutToggle = ''
+    let g:AutoPairsShortcutJump=''
+    let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'", '`':'`'}
+
+    " Gtags 快捷键
+    "nnoremap <leader>g :Gtags<SPACE>
+    "nnoremap <leader>c :GtagsCursor<CR>
+    "nnoremap <leader>p :Gtags -f %<CR>
+    "nnoremap <M-p> :Gtags -f %<CR>
+
+    nnoremap <C-n> :cn<CR>
+    nnoremap <C-p> :cp<CR>
+    "nnoremap <C-\><C-]> :GtagsCursorAndJump<CR>
+
+    "nnoremap <M-n> :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+    "nnoremap - :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+    "nnoremap <M-n> :NERDTree %:p:h<CR>
+    nnoremap <M-f> :NERDTreeFind<CR>
+    nnoremap <F10> :NERDTreeToggle<CR>
+    nnoremap <M-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "right"
 
 let g:NERDTreeMapUpdirKeepOpen='h'
 let g:NERDTreeMapChangeRoot='l'
@@ -482,9 +578,12 @@ function! SetProjectRoot()
 endfunction
 
 command! CD silent! call SetProjectRoot()
-inoremap lkj <ESC>:w<CR>
+"inoremap lkj <ESC>:w<CR>
 nnoremap <Leader>w :w<CR>
-nnoremap <M-f> :CD<CR>
+"nnoremap <M-f> :CD<CR>
+nnoremap <leader>c :CD<CR>
+nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
+
 
 " vimmake setting
 let g:vimmake_mode = {}
@@ -614,6 +713,111 @@ set shortmess+=T
 nnoremap <leader>h :Startify<CR>
 let g:rooter_use_lcd = 1
 let g:rooter_silent_chdir = 1
+let g:rooter_patterns = ['.git/', 'xmake.lua', '.root']
 
-nnoremap <silent> <F4> :AsyncRun -cwd=<root>/build cmake ..<CR>
-nnoremap <silent> <F8> :AsyncRun -cwd=<root>/build -mode=0 make run <cr>
+augroup coderunner
+    autocmd!
+    autocmd FileType c,cpp nnoremap <silent> <F9> :AsyncRun xmake build<CR>
+    autocmd FileType c,cpp nnoremap <silent> <leader>b :AsyncRun xmake build<CR>
+    autocmd FileType c,cpp nnoremap <silent> <leader>r :AsyncRun xmake run<cr>
+    autocmd FileType c,cpp nnoremap <silent> <F5> :AsyncRun xmake run<cr>
+    autocmd FileType c,cpp nnoremap <silent> <leader>k :AsyncRun xmake project -k compile_commands<cr>
+
+    autocmd FileType rust nnoremap <F9> :AsyncRun cargo build<CR>
+    autocmd FileType rust nnoremap <F5> :AsyncRun cargo run<CR>
+    autocmd FileType rust nnoremap <leader>b :AsyncRun cargo build<CR>
+    autocmd FileType rust nnoremap <leader>r :AsyncRun cargo run<CR>
+    "nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+    "nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+augroup END
+command! CompileCommands :AsyncRun xmake project -k compile_commands<cr>
+if exists('g:loaded_webdevicons')
+    call webdevicons#refresh()
+endif
+"let g:ycm_use_clangd = 'never'
+" let g:asyncrun_encs = 'gbk'
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '~'
+
+" xmake
+let $COLORTERM="nocolor"
+set errorformat=error:\ %f:%l:%c:\ error:\ %m,%f:%l:\ %m
+
+
+nmap <M-d> <Plug>(git-p-diff-preview)
+
+" show blame line manually if `let g:gitp_blame_virtual_text = 0`
+nmap <leader>s <Plug>(git-p-i-blame)
+" augroup autoformat_settings
+"   autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+"   autocmd FileType python AutoFormatBuffer yapf
+"   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+" augroup END
+Glaive codefmt plugin[mappings]
+autocmd FileType python let b:codefmt_formatter = 'yapf'
+
+
+" Press enter key to trigger snippet expansion
+" The parameters are the same as `:help feedkeys()`
+
+" c-j c-k for moving in snippet
+" let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+set completeopt=noinsert,menuone,noselect
+set shortmess+=c
+
+inoremap <c-c> <ESC>
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+function! Terminal_MetaMode(mode)
+    set ttimeout
+    if $TMUX != ''
+        set ttimeoutlen=30
+    elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
+        set ttimeoutlen=80
+    endif
+    if has('nvim') || has('gui_running')
+        return
+    endif
+    function! s:metacode(mode, key)
+        if a:mode == 0
+            exec "set <M-".a:key.">=\e".a:key
+        else
+            exec "set <M-".a:key.">=\e]{0}".a:key."~"
+        endif
+    endfunc
+    for i in range(10)
+        call s:metacode(a:mode, nr2char(char2nr('0') + i))
+    endfor
+    for i in range(26)
+        call s:metacode(a:mode, nr2char(char2nr('a') + i))
+        call s:metacode(a:mode, nr2char(char2nr('A') + i))
+    endfor
+    if a:mode != 0
+        for c in [',', '.', '/', ';', '[', ']', '{', '}']
+            call s:metacode(a:mode, c)
+        endfor
+        for c in ['?', ':', '-', '_']
+            call s:metacode(a:mode, c)
+        endfor
+    else
+        for c in [',', '.', '/', ';', '{', '}']
+            call s:metacode(a:mode, c)
+        endfor
+        for c in ['?', ':', '-', '_']
+            call s:metacode(a:mode, c)
+        endfor
+    endif
+endfunc
+
+call Terminal_MetaMode(0)
+
+if $CONDA_PREFIX != ''
+    let $VIRTUAL_ENV=$CONDA_PREFIX
+endif
+
