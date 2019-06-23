@@ -38,12 +38,11 @@ Plug 'ivechan/molokai'                                      " monokai 配色
 Plug 'airblade/vim-rooter'
 Plug 'szymonmaszke/vimpyter'
 Plug 'rakr/vim-one'
-Plug 'lifepillar/vim-gruvbox8'
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'pbogut/fzf-mru.vim'
+" Plug 'pbogut/fzf-mru.vim'
 " Plug 'iamcco/sran.nvim', { 'do': { -> sran#util#install() } }
 " Plug 'iamcco/git-p.nvim'
 Plug 'google/vim-maktaba'
@@ -82,10 +81,12 @@ Plug 'tpope/vim-fugitive'                                  " git plugin
 Plug 'dracula/vim'
 " Plug 'vim-scripts/gtags.vim'              " 这个太老了，自行去 GNU Global下载
 "Plug 'ivechan/gtags.vim'                                   " gtags 插件
-Plug 'ludovicchabant/vim-gutentags'                        " 自动管理 gtags/ctags 的插件
-Plug 'skywind3000/gutentags_plus'                          " 在多项目里管理 tags 生成，不过 bug 多
+"Plug 'ludovicchabant/vim-gutentags'                        " 自动管理 gtags/ctags 的插件
+"Plug 'skywind3000/gutentags_plus'                          " 在多项目里管理 tags 生成，不过 bug 多
 " Plug 'skywind3000/vim-preview'                             " 同上
 "Plug 'jiangmiao/auto-pairs'
+Plug 'jsfaint/gen_tags.vim'
+
                                                            " Plug 'nathanaelkane/vim-indent-guides'    " 显示 indent，不过一般不用
 " Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
 Plug 'hdima/python-syntax'                                 " 增强对 Python 语法支持
@@ -94,7 +95,7 @@ Plug 'lervag/vimtex'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'haishanh/night-owl.vim'
 Plug 'cocopon/iceberg.vim'
-"Plug 'ivechan/taggy'
+Plug 'ivechan/taggy'
 call plug#end()
 call glaive#Install()
 
@@ -124,8 +125,21 @@ set guioptions=0               " 不需要一些 gui，影响可视区域
 set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 "set guifont=FuraMono\ NF:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 set background=dark
-"colorscheme flattened_light
-colorscheme iceberg
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+colorscheme PaperColor
+"colorscheme iceberg
 "colorscheme night-owl
 "set iskeyword-=_               " 让vim把vim当成分隔符
 set fileformat=unix
@@ -307,7 +321,7 @@ nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>fg :GFiles<CR>
 nnoremap <leader>fd :GFiles?<CR>
-nnoremap <leader>ft :Tags?<CR>
+nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fp :BTags<CR>
 nnoremap <leader>fa :Ag<CR>
 
@@ -371,7 +385,10 @@ nnoremap <Leader>j :
 
     "\ 'cpp':['clang', 'gcc', 'cppcheck', 'flawfinder'],
     let g:ale_linters = {'python': ['flake8'], 
-                \ 'tex':['chktex', 'lacheck'] }
+                \ 'tex':['chktex', 'lacheck'] ,
+                \ 'c':[''] ,
+                \ 'cpp':[''] ,
+                \ }
     " let g:ale_lint_on_text_changed = 'never' " 仅在打开文件和保存的时候 Lint 
     let g:ale_lint = 1
     let g:ale_set_loclist = 1
@@ -383,6 +400,7 @@ nnoremap <Leader>j :
     " YCM 设置
     let g:ycm_key_invoke_completion = '<C-x><C-o>'
     let g:ycm_add_preview_to_completeopt = 0 " preview窗口影响布局
+    let g:ycm_show_diagnostics_ui = 0 " 已经有更好的ALE
     let g:ycm_show_diagnostics_ui = 0 " 已经有更好的ALE
     " set completeopt=menu,menuone
     let g:ycm_min_num_of_chars_for_completion = 1
@@ -399,6 +417,8 @@ nnoremap <Leader>j :
     " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
     " let g:ycm_clangd_binary_path = exepath("clangd")j
     nnoremap <leader>jd :YcmCompleter GoTo<CR> 
+    nnoremap <leader>jr :YcmCompleter GoToReferences<CR> 
+    nnoremap <S-k> :YcmCompleter GetDoc<CR> 
     " nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR> 
     " nnoremap <leader>jf :YcmCompleter GoToDefinition<CR> 
     " nnoremap <leader>jr :YcmCompleter GoToReferences<CR> 
@@ -436,7 +456,8 @@ nnoremap <Leader>j :
     " gtags 配置
     " https://www.gnu.org/software/global/
     let $GTAGSLABEL = 'native-pygments'
-    "let $GTAGSLABEL = 'new-ctags'
+    " let $GTAGSLABEL = 'new-ctags'
+    " let $GTAGSLABEL='pygments'
 
     if has('win32')
         let $GTAGSCONF = 'C:\Users\lhche\gtags.conf' "必须重新配置
@@ -479,7 +500,7 @@ nnoremap <Leader>j :
 
     "lightline configuration
     let g:lightline = {
-        \ 'colorscheme': 'iceberg',
+        \ 'colorscheme': 'PaperColor',
         \ 'component_function': {
         \   'gitbranch': 'fugitive#head',
         \   'filetype': 'MyFiletype',
@@ -507,7 +528,7 @@ nnoremap <Leader>j :
     let g:lightline.active = {
         \ 'left': [ [ 'mode', 'paste' ],
         \           ['readonly', 'filename', 'modified' ],
-        \           ['']
+        \           ['taggy']
         \         ],
         \ 'right': [ 
         \            ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
@@ -563,6 +584,9 @@ let g:NERDTreeWinPos = "right"
 
 let g:NERDTreeMapUpdirKeepOpen='h'
 let g:NERDTreeMapChangeRoot='l'
+let g:NERDTreeMapToggleFilters=''
+let g:NERDTreeMapToggleZoom='f'
+nnoremap - :NERDTreeFind<CR>
 " set working directory to git project root
 " or directory of current file if not git project
 function! SetProjectRoot()
@@ -588,19 +612,6 @@ nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
 " vimmake setting
 let g:vimmake_mode = {}
 let g:vimmake_mode['py'] = 'normal'
-let g:PaperColor_Theme_Options = {
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins' : 1
-  \     },
-  \     'cpp': {
-  \       'highlight_standard_library': 1
-  \     },
-  \     'c': {
-  \       'highlight_builtins' : 1
-  \     }
-  \   }
-  \ }
 
 let g:tagbar_width = 35
 let g:tagbar_left = 1
@@ -716,7 +727,10 @@ let g:rooter_silent_chdir = 1
 let g:rooter_patterns = ['.git/', 'xmake.lua', '.root']
 
 augroup coderunner
+
     autocmd!
+    autocmd FileType c,cpp let g:ycm_show_diagnostics_ui = 1
+    autocmd FileType c,cpp nnoremap <silent> <F9> :AsyncRun xmake build<CR>
     autocmd FileType c,cpp nnoremap <silent> <F9> :AsyncRun xmake build<CR>
     autocmd FileType c,cpp nnoremap <silent> <leader>b :AsyncRun xmake build<CR>
     autocmd FileType c,cpp nnoremap <silent> <leader>r :AsyncRun xmake run<cr>
@@ -821,3 +835,32 @@ if $CONDA_PREFIX != ''
     let $VIRTUAL_ENV=$CONDA_PREFIX
 endif
 
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar': 1,
+      \ 'notes': 1,
+      \ 'markdown': 1,
+      \ 'netrw': 1,
+      \ 'unite': 1,
+      \ 'vimwiki': 1,
+      \ 'pandoc': 1,
+      \ 'infolog': 1,
+      \ 'mail': 1
+      \}
+
+
+let g:gen_tags#ctags_auto_gen = 1
+let g:gen_tags#gtags_auto_gen = 1
+let g:gen_tags#blacklist = ['$HOME']
+" autocmd User GenTags#GtagsLoaded nnoremap gd <c-]>
+command! FZFMru call fzf#run({
+\ 'source':  reverse(s:all_files()),
+\ 'sink':    'edit',
+\ 'options': '-m -x +s',
+\ 'down':    '40%' })
+
+function! s:all_files()
+  return extend(
+  \ filter(copy(v:oldfiles),
+  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"),
+  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'))
+endfunction
