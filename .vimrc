@@ -1,5 +1,5 @@
 " {{{ Plug
-call plug#begin('~/vimplug/plugged')
+call plug#begin('~/.vimplug/plugged')
 Plug 'scrooloose/nerdtree',  { 'on': ['NERDTreeToggle', 'NERDTreeFind' ]}
 Plug 'pechorin/any-jump.vim'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
