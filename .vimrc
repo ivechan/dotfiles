@@ -545,7 +545,7 @@ let g:lightline = {
       \ },
       \ 'component': {
       \  'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
-      \  'taggy': '%{Taggy_Get_Current_Tag()}',
+      \  'taggy': '%{Tag_Get_Current_Tag()}',
       \  },
       \ }
 function! MyFiletype()
