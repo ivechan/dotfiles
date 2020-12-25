@@ -1,0 +1,21 @@
+#!/bin/sh
+# Use socat to proxy git through an HTTP CONNECT firewall.
+# Useful if you are trying to clone git:// from inside a company.
+# Requires that the proxy allows CONNECT to port 9418.
+#
+# Save this file as gitproxy somewhere in your path (e.g., ~/bin) and then run
+#   chmod +x gitproxy
+#   git config --global core.gitproxy gitproxy
+#
+# More details at http://tinyurl.com/8xvpny
+# https://gist.github.com/sit/49288
+# https://www.emilsit.net/blog/archives/how-to-use-the-git-protocol-through-a-http-connect-proxy/
+# Install socat. For example, on Debian/Ubuntu, just sudo apt-get install socat.
+# Create a script called gitproxy in your bin directory; You will need to replace proxy.yourcompany.com with the name of your proxy host and the port with the port used by the proxy (common ports include 3128, 8123 and 8000). (If the javascript is broken, visit Gist 49288 and download the raw file; or use the original commands as reproduced in the comments.)
+# Configure git to use it:
+# $ git config –global core.gitproxy gitproxy
+# Configuration. Common proxy ports are 3128, 8123, 8000.
+_proxy=localhost
+_proxyport=7890
+
+exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxypor
