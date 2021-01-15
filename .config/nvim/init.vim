@@ -1,23 +1,23 @@
 " {{{ Plug
-call plug#begin('~/vimplug/plugged')
-Plug 'puremourning/vimspector'
-Plug 'AndrewRadev/quickpeek.vim'
-Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'
-" Plug 'scrooloose/nerdtree',  { 'on': ['NERDTreeToggle', 'NERDTreeFind' ]}
+call plug#begin('~/.vimplug/plugged')
+Plug 'scrooloose/nerdtree',  { 'on': ['NERDTreeToggle', 'NERDTreeFind' ]}
+Plug 'pechorin/any-jump.vim'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'jistr/vim-nerdtree-tabs'
 " Plug 'ryanoasis/vim-devicons'                              " 使用 NERD 字体让 vim 能显示图标
 Plug 'tpope/vim-surround'                                  " 更方便地使用括号，引号等成对出现的符号
+" Plug '~/quickpeek.vim'
 Plug 'easymotion/vim-easymotion'                           " easymotion
 Plug 'tpope/vim-fugitive'
+Plug 'kjssad/quantum.vim'
 Plug 'kana/vim-textobj-user'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'gaving/vim-textobj-argument'                         " argument text-object support
+Plug 'morhetz/gruvbox'
 Plug 'kana/vim-textobj-function'
 Plug 'bps/vim-textobj-python'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-indent'
+Plug 'mileszs/ack.vim'
 " Plug 'Yggdroot/indentLine'
 Plug 'Yggdroot/LeaderF'
 Plug 'tamago324/LeaderF-filer'
@@ -26,8 +26,10 @@ Plug 'adriaanzon/vim-textobj-matchit'
 Plug 'rakr/vim-one'
 " Plug 'tpope/vim-sleuth'
 Plug 'liuchengxu/vista.vim'
-Plug 'chriskempson/base16-vim'
+Plug 'cocopon/iceberg.vim'
+" Plug 'chriskempson/base16-vim'
 
+Plug 'arcticicestudio/nord-vim'
 Plug 'lucapette/vim-textobj-underscore'
 " Plug 'vimtaku/vim-textobj-keyvalue'
 Plug 'wellle/targets.vim'                                  " provides additional text objects
@@ -37,21 +39,23 @@ Plug 'tpope/vim-unimpaired'                                " Pairs of handy brac
 Plug 'godlygeek/tabular'                                   " 更简单地对齐
 Plug 'SirVer/ultisnips'                                    " snippets框架
 Plug 'ivechan/vim-snippets'                                " 具体某个语言的snippets, 自定义
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'valloric/youcompleteme'                              " 补全框架
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ivechan/echodoc.vim'                                  " 补全的时候，在 statusline 显示函数原型
 Plug 'tpope/vim-commentary'                                " 使用 gc 来注释
 " Plug 'w0rp/ale'                                            " 异步代码检查 (Linting) 框架
 Plug 'maximbaz/lightline-ale'                              " 在右下角显示 linting 状态
 Plug 'xolox/vim-misc'                                      " 一些补充函数
 Plug 'xolox/vim-session', {'on': ['OpenSession', 'SaveSession']}                                   " Session Manager
-"Plug 'dyng/ctrlsf.vim'
+" Plug 'ivechan/molokai'                                      " monokai 配色
+Plug 'tomasr/molokai'
+" Plug 'dyng/ctrlsf.vim'
 "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " Plug 'rstacruz/vim-closer'
 " Plug 'airblade/vim-rooter'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
-" Plug 'jesseleite/vim-agriculture'
+Plug 'jesseleite/vim-agriculture'
 
 " Plug 'google/vim-maktaba'
 "
@@ -60,7 +64,7 @@ Plug 'xolox/vim-session', {'on': ['OpenSession', 'SaveSession']}                
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
-Plug 'neomake/neomake', {'on': 'Neomake'}
+" Plug 'neomake/neomake', {'on': 'Neomake'}
                                                            " Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'                               " statusline 插件
                                                            " Plug 'vim-scripts/gtags.vim'              " 这个太老了，自行去 GNU Global下载
@@ -70,14 +74,13 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}     " 自动 pep8 indent
 Plug 'hdima/python-syntax', {'for': 'python'}                                 " 增强对 Python 语法支持
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
-Plug 'lervag/vimtex', {'for': ['tex', 'latex']}
+" Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}    " 增强对 C++ 支持
+" Plug 'lervag/vimtex', {'for': ['tex', 'latex']}
 Plug 'NLKNguyen/papercolor-theme'
-" Plug 'pechorin/any-jump.vim'
 "
-Plug 'ivechan/taggy'
+" Plug 'ivechan/taggy'
 Plug 'ivechan/gtags.vim'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 "}}}
 let mapleader = ' '          " change leader key to <space>
@@ -86,8 +89,6 @@ let g:mapleader = ' '        " change leader key to <space>
 syntax enable
 filetype plugin indent on          
 packadd! matchit
-packadd! termdebug
-
 set nocompatible
 set foldmethod=marker
 set includeexpr=printf('include/%s',v:fname)
@@ -97,11 +98,13 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " true color and colorscheme UI and font
 set termguicolors              " true color and colorscheme UI and font
 set vb t_vb= "  no bell
 set background=dark
-" set t_Co=256
 set winaltkeys=no
 " set guifont=Fira\ Mono:h10   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 " set guifont=JetBrains\ Mono:h11   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 set guifont=JetBrainsMono\ NF:h11   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
+
+
+
 " set guifont=JetBrainsMono\ Nerd:h11   " NERD 字体，可以显示图标, https://github.com/ryanoasis/nerd-fonts
 let g:PaperColor_Theme_Options = {
   \   'language': {
@@ -117,12 +120,11 @@ let g:PaperColor_Theme_Options = {
   \   }
   \ }
 " colorscheme nord            " 最好的颜色方案
-" let base16colorspace=256
-" colorscheme base16-helios
-" colorscheme PaperColor
+
+
 colorscheme PaperColor
 "}}}
-
+let g:gruvbox_contrast_dark='hard'
 " {{{  Minimal Setting
 set fileformat=unix
 set fileencoding=utf-8
@@ -135,7 +137,8 @@ set laststatus=2               " Always display the statusline in all windows
 set showtabline=2              " Always display the tabline, even if there is only one tab
 set noshowmode                 " Hide the default mode text (e.g. -- INSERT -- below the statusline), also for echodoc setting
 set tabstop=4                  " show existing tab with 4 space width
-set expandtab                  " on pressing tab, insert 4 spaces
+" set expandtab                  " on pressing tab, insert 4 spaces
+" set smarttab
 set hidden
 set shiftwidth=4              " >> indents by 4 spaces.
 set shiftround                 " >> indents to next multiple of 'shiftwidth'
@@ -181,7 +184,7 @@ set colorcolumn=80
 set backspace=indent,eol,start
 set dictionary+=~/vimfiles/scowl/wordlist
 set wildignore+=.o,*.bak,*~,*.sw?,*.aux,*.toc,*.git,*.svn,*.so,*.a,*.pyc,*.aux,*.toc,*.exe,*.pb " 隐藏一些自动生成的文件
-set timeout ttimeout timeoutlen=500 ttimeoutlen=100
+set notimeout ttimeout timeoutlen=100
 set shortmess+=c " dot't give ins-completion-menu message
 set shortmess+=T
 "}}}
@@ -191,8 +194,6 @@ let python_highlight_all = 1
 let g:asyncrun_encs = 'gbk'
 let g:asyncrun_open = 6 " set the quickfix window 6 lines height.
 let g:asyncrun_bell = 1 " ring the bell to notify you job finished
-let g:asynctasks_term_pos = 'tab'
-let g:asynctasks_term_reuse = 1
 " toggles the quickfix window.
 let g:Quickfix_Win_Height=6
 command! -bang -nargs=? QFix call QFixToggle(<bang>0)
@@ -257,7 +258,6 @@ endif
 "}}}
 
 " {{{Leaderf
-let g:Lf_ShowDevIcons = 0
 let g:Lf_UseVersionControlTool = 0
 let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 0
@@ -271,91 +271,91 @@ let g:Lf_PreviewResult = {
         \ 'Line': 0,
         \ 'Colorscheme': 0
         \}
-" let s:nord0 = ["#2E3440", "NONE"]
-" let s:nord1 = ["#3B4252", 0]
-" let s:nord2 = ["#434C5E", "NONE"]
-" let s:nord3 = ["#4C566A", 8]
-" let s:nord4 = ["#D8DEE9", "NONE"]
-" let s:nord5 = ["#E5E9F0", 7]
-" let s:nord6 = ["#ECEFF4", 15]
-" let s:nord7 = ["#8FBCBB", 14]
-" let s:nord8 = ["#88C0D0", 6]
-" let s:nord9 = ["#81A1C1", 4]
-" let s:nord10 = ["#5E81AC", 12]
-" let s:nord11 = ["#BF616A", 1]
-" let s:nord12 = ["#D08770", 11]
-" let s:nord13 = ["#EBCB8B", 3]
-" let s:nord14 = ["#A3BE8C", 2]
-" let s:nord15 = ["#B48EAD", 5]
-" let g:Lf_PopupPalette = {
-"     \  'light': {
-"     \      'Lf_hl_match': {
-"     \                'gui': 'NONE',
-"     \                'font': 'NONE',
-"     \                'guifg': 'NONE',
-"     \                'guibg': '#303136',
-"     \                'cterm': 'NONE',
-"     \                'ctermfg': 'NONE',
-"     \                'ctermbg': '236'
-"     \              },
-"     \      'Lf_hl_cursorline': {
-"     \                'gui': 'NONE',
-"     \                'font': 'NONE',
-"     \                'guifg': 'NONE',
-"     \                'guibg': '#303136',
-"     \                'cterm': 'NONE',
-"     \                'ctermfg': 'NONE',
-"     \                'ctermbg': '236'
-"     \              },
-"     \      },
-"     \  'dark': {
-"     \       'Lf_hl_popup_inputMode': {
-"     \                'gui': 'NONE',
-"     \                'font': 'NONE',
-"     \                'guifg': '#3B4252',
-"     \                'guibg': '#88C0D0',
-"     \                'cterm': 'NONE',
-"     \                'ctermfg': 'NONE',
-"     \                'ctermbg': 'NONE'
-"     \        },
-"     \       'Lf_hl_popup_normalMode': {
-"     \                'gui': 'NONE',
-"     \                'font': 'NONE',
-"     \                'guifg': '#3B4252',
-"     \                'guibg': '#88C0D0',
-"     \                'cterm': 'NONE',
-"     \                'ctermfg': 'NONE',
-"     \                'ctermbg': 'NONE'
-"     \        },
-"     \       'Lf_hl_popup_window': {
-"     \                'gui': 'NONE',
-"     \                'font': 'NONE',
-"     \                'guifg': '#88C0D0',
-"     \                'guibg': '#3B4252',
-"     \                'cterm': 'NONE',
-"     \                'ctermfg': 'NONE',
-"     \                'ctermbg': 'NONE'
-"     \        },
-"     \       'Lf_hl_cursorline': {
-"     \                'gui': 'NONE',
-"     \                'font': 'NONE',
-"     \                'guifg': '#ECEFF4',
-"     \                'guibg': 'NONE',
-"     \                'cterm': 'NONE',
-"     \                'ctermfg': 'NONE',
-"     \                'ctermbg': 'NONE'
-"     \        },
-"     \       'Lf_hl_popup_inputText': {
-"     \                'gui': 'NONE',
-"     \                'font': 'NONE',
-"     \                'guifg': '#ECEFF4',
-"     \                'guibg': '#4C566A',
-"     \                'cterm': 'NONE',
-"     \                'ctermfg': 'NONE',
-"     \                'ctermbg': 'NONE'
-"     \        },
-"     \      }
-"     \  }
+let s:nord0 = ["#2E3440", "NONE"]
+let s:nord1 = ["#3B4252", 0]
+let s:nord2 = ["#434C5E", "NONE"]
+let s:nord3 = ["#4C566A", 8]
+let s:nord4 = ["#D8DEE9", "NONE"]
+let s:nord5 = ["#E5E9F0", 7]
+let s:nord6 = ["#ECEFF4", 15]
+let s:nord7 = ["#8FBCBB", 14]
+let s:nord8 = ["#88C0D0", 6]
+let s:nord9 = ["#81A1C1", 4]
+let s:nord10 = ["#5E81AC", 12]
+let s:nord11 = ["#BF616A", 1]
+let s:nord12 = ["#D08770", 11]
+let s:nord13 = ["#EBCB8B", 3]
+let s:nord14 = ["#A3BE8C", 2]
+let s:nord15 = ["#B48EAD", 5]
+let g:Lf_PopupPalette = {
+    \  'light': {
+    \      'Lf_hl_match': {
+    \                'gui': 'NONE',
+    \                'font': 'NONE',
+    \                'guifg': 'NONE',
+    \                'guibg': '#303136',
+    \                'cterm': 'NONE',
+    \                'ctermfg': 'NONE',
+    \                'ctermbg': '236'
+    \              },
+    \      'Lf_hl_cursorline': {
+    \                'gui': 'NONE',
+    \                'font': 'NONE',
+    \                'guifg': 'NONE',
+    \                'guibg': '#303136',
+    \                'cterm': 'NONE',
+    \                'ctermfg': 'NONE',
+    \                'ctermbg': '236'
+    \              },
+    \      },
+    \  'dark': {
+    \       'Lf_hl_popup_inputMode': {
+    \                'gui': 'NONE',
+    \                'font': 'NONE',
+    \                'guifg': '#3B4252',
+    \                'guibg': '#88C0D0',
+    \                'cterm': 'NONE',
+    \                'ctermfg': 'NONE',
+    \                'ctermbg': 'NONE'
+    \        },
+    \       'Lf_hl_popup_normalMode': {
+    \                'gui': 'NONE',
+    \                'font': 'NONE',
+    \                'guifg': '#3B4252',
+    \                'guibg': '#88C0D0',
+    \                'cterm': 'NONE',
+    \                'ctermfg': 'NONE',
+    \                'ctermbg': 'NONE'
+    \        },
+    \       'Lf_hl_popup_window': {
+    \                'gui': 'NONE',
+    \                'font': 'NONE',
+    \                'guifg': '#88C0D0',
+    \                'guibg': '#3B4252',
+    \                'cterm': 'NONE',
+    \                'ctermfg': 'NONE',
+    \                'ctermbg': 'NONE'
+    \        },
+    \       'Lf_hl_cursorline': {
+    \                'gui': 'NONE',
+    \                'font': 'NONE',
+    \                'guifg': '#ECEFF4',
+    \                'guibg': 'NONE',
+    \                'cterm': 'NONE',
+    \                'ctermfg': 'NONE',
+    \                'ctermbg': 'NONE'
+    \        },
+    \       'Lf_hl_popup_inputText': {
+    \                'gui': 'NONE',
+    \                'font': 'NONE',
+    \                'guifg': '#ECEFF4',
+    \                'guibg': '#4C566A',
+    \                'cterm': 'NONE',
+    \                'ctermfg': 'NONE',
+    \                'ctermbg': 'NONE'
+    \        },
+    \      }
+    \  }
 nnoremap <leader>fe :Leaderf filer --popup<CR>
 nnoremap <leader>ft :Leaderf vimtag<space>
 nnoremap <leader>ff :Leaderf file --popup<CR>
@@ -363,72 +363,17 @@ nnoremap <leader>f :Leaderf file --popup<CR>
 nnoremap <leader>l :Leaderf line --popup<CR>
 nnoremap <leader>fl :Leaderf line --popup<CR>
 nnoremap <leader>fm :Marks<CR>
-nnoremap <leader>fb :Leaderf buffer --popup<CR>
+nnoremap <leader>fb :LeaderfBufTag<CR>
+nnoremap <leader>b :Leaderf buffer --popup<CR>
 nnoremap <leader>gt :Gtags<SPACE>
 nnoremap <leader>gw :<C-U><C-R>=printf("Gtags %s", expand("<cword>"))<CR><CR>
-nnoremap <leader>b :Leaderf buffer --popup<CR>
+nnoremap <leader>gg :<C-U><C-R>=printf("Gtags %s", expand("<cword>"))<CR><CR>
 nnoremap <leader>fa :Ag<CR>
 nnoremap <leader>gp :Gpush
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit<Space>
-nnoremap <Leader>a :Leaderf rg<Space>
-noremap <leader>jj :<C-U><C-R>=printf("Leaderf! rg --popup %s", expand("<cword>"))<CR>
-nnoremap <Leader>t :Leaderf task<CR>
-nnoremap <Leader>p :Leaderf command<CR>
+" nnoremap <Leader>a :Leaderf rg<Space>
 nnoremap <M-m> :Leaderf mru --popup<CR>
-
-
-function! s:lf_task_source(...)
-	let rows = asynctasks#source(&columns * 48 / 100)
-	let source = []
-	for row in rows
-		let name = row[0]
-		let source += [name . '  ' . row[1] . '  : ' . row[2]]
-	endfor
-	return source
-endfunction
-
-
-function! s:lf_task_accept(line, arg)
-	let pos = stridx(a:line, '<')
-	if pos < 0
-		return
-	endif
-	let name = strpart(a:line, 0, pos)
-	let name = substitute(name, '^\s*\(.\{-}\)\s*$', '\1', '')
-	if name != ''
-		exec "AsyncTask " . name
-	endif
-endfunction
-
-function! s:lf_task_digest(line, mode)
-	let pos = stridx(a:line, '<')
-	if pos < 0
-		return [a:line, 0]
-	endif
-	let name = strpart(a:line, 0, pos)
-	return [name, 0]
-endfunction
-
-function! s:lf_win_init(...)
-	setlocal nonumber
-	setlocal nowrap
-endfunction
-
-
-let g:Lf_Extensions = get(g:, 'Lf_Extensions', {})
-let g:Lf_Extensions.task = {
-			\ 'source': string(function('s:lf_task_source'))[10:-3],
-			\ 'accept': string(function('s:lf_task_accept'))[10:-3],
-			\ 'get_digest': string(function('s:lf_task_digest'))[10:-3],
-			\ 'highlights_def': {
-			\     'Lf_hl_funcScope': '^\S\+',
-			\     'Lf_hl_funcDirname': '^\S\+\s*\zs<.*>\ze\s*:',
-			\ },
-		\ }
-
-
-"}}}
 
 " {{{ Fzf setting
 function! s:ag_with_opts(arg, bang)
@@ -490,28 +435,29 @@ nmap <silent> <M-k> :lprevious<CR>
 nmap <silent> <M-j> :lnext<CR>
 "}}}
 
-" {{{YCM 设置
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_key_invoke_completion = '<C-x><C-o>'
-let g:ycm_add_preview_to_completeopt = 0 " preview窗口影响布局
-let g:ycm_show_diagnostics_ui = 1 " 已经有更好的ALE
-set completeopt=menu,menuone
-let g:ycm_min_num_of_chars_for_completion = 2
+" " {{{YCM 设置
+" let g:ycm_confirm_extra_conf = 0
+" let g:ycm_key_invoke_completion = '<C-x><C-o>'
+" let g:ycm_add_preview_to_completeopt = 0 " preview窗口影响布局
+" let g:ycm_show_diagnostics_ui = 0 " 已经有更好的ALE
+" set completeopt=menu,menuone
+" let g:ycm_min_num_of_chars_for_completion = 1
 " let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_complete_in_strings=1
-let g:ycm_python_binary_path = 'python'
-let g:ycm_log_level = 'debug'
-let g:ycm_auto_trigger=1
-let g:ycm_max_num_candidates = 30
-" Let clangd fully control code completion
-let g:ycm_clangd_uses_ycmd_caching = 0
-" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
-" let g:ycm_clangd_binary_path = exepath("clangd")
-nnoremap <leader>jd :YcmCompleter GoTo<CR> 
-nnoremap <leader>jr :YcmCompleter GoToReferences<CR> 
-nnoremap <S-k> :YcmCompleter GetDoc<CR> 
+" let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_use_ultisnips_completer = 1
+" let g:ycm_complete_in_strings=1
+" let g:ycm_python_binary_path = 'python'
+" " let g:ycm_log_level = 'info'
+" let g:ycm_auto_trigger=2
+" let g:ycm_max_num_candidates = 30
+" let g:ycm_log_level = 'debug'
+" " Let clangd fully control code completion
+" let g:ycm_clangd_uses_ycmd_caching = 0
+" " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+" " let g:ycm_clangd_binary_path = exepath("clangd")
+" nnoremap <leader>jd :YcmCompleter GoTo<CR> 
+" nnoremap <leader>jr :YcmCompleter GoToReferences<CR> 
+" nnoremap <S-k> :YcmCompleter GetDoc<CR> 
 "}}}
 
 " {{{tags setting
@@ -559,21 +505,22 @@ noremap <silent> <C-\>z :GscopeFind z <C-R><C-W><cr>
 " https://www.gnu.org/software/global/
 let $GTAGSLABEL = 'native-pygments'
 
-if has('win32')
-    let $GTAGSCONF = 'C:\\Users\\lhche\\gtags.conf' "必须重新配置
-else
-    let $GTAGSCONF = '/home/vagrant/gtags.conf'
-endif
+" if has('win32')
+"     let $GTAGSCONF = 'C:\\Users\\lhche\\gtags.conf' "必须重新配置
+" else
+"     let $GTAGSCONF = '/home/jing/gtags.conf'
+" endif
 " let gutentags_define_advanced_commands = 1
 " 配置 ctags 的参数 https://github.com/universal-ctags/ctags
-let g:gutentags_ctags_extra_args = ['--extras=+r']
+" let g:gutentags_ctags_extra_args = ['--extras=+r']
 " let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
+let g:gutentags_ctags_extra_args = ['--extras=+r']
 let g:gutentags_ctags_extra_args += ['--kinds-c++=+px']
 let g:gutentags_ctags_extra_args += ['--kinds-c=+px']
 " let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 "let g:gutentags_ctags_extra_args += ['--exclude=@.gitignore']
 "let g:gutentags_ctags_extra_args += ['--exclude=@.ignore']
-let g:gutentags_auto_add_gtags_cscope = 0
+let g:gutentags_auto_add_gtags_cscope = 1
 "}}}
 
 " {{{ 自动启动echodoc
@@ -581,9 +528,9 @@ let g:echodoc#enable_at_startup=1
 "}}}
 
 " {{{UltiSnip插件
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 "}}}
 
@@ -603,13 +550,13 @@ endif
       " \   'filetype': 'MyFiletype',
       " \   'fileformat': 'MyFileformat',
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
+      \ 'colorscheme': 'powerline',
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
+      \   'cocstatus': 'coc#status',
       \ },
       \ 'component': {
       \  'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
-      \  'current_tag': '%{Tag_Get_Current_Tag()}',
       \  },
       \ }
 function! MyFiletype()
@@ -636,11 +583,11 @@ let g:lightline.component_type = {
       \ }
 let g:lightline.active = {
     \ 'left': [ [ 'mode', 'paste' ],
-    \           ['readonly', 'filename', 'modified' ],
-    \           ['current_tag']
+    \           [ 'readonly', 'filename', 'modified' ],
+    \           ['taggy']
     \         ],
     \ 'right': [ 
-    \            [ 'gutentags_status' ],
+    \            [ 'gutentags_status', 'cocstatus' ],
     \            [ 'linter_checking', 'linter_errors', 'linter_warnings'],
     \            [ 'lineinfo' ],
     \            [ 'percent' ],
@@ -679,7 +626,7 @@ let g:NERDTreeMapUpdirKeepOpen='h'
 let g:NERDTreeMapChangeRoot='l'
 let g:NERDTreeMapToggleFilters=''
 let g:NERDTreeMapToggleZoom='f'
-" nnoremap - :NERDTreeFind<CR>
+nnoremap - :NERDTreeFind<CR>
 " NERDTrees File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -743,7 +690,7 @@ let g:vimtex_compiler_latexmk_engines = {
 if !exists('g:ycm_semantic_triggers')
 let g:ycm_semantic_triggers = {}
 endif
-let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+" let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 "let g:vimtex_view_general_viewer = 'mupdf'
 let g:vimtex_view_general_viewer = 'SumatraPDF'
 let g:vimtex_view_general_options
@@ -812,18 +759,18 @@ augroup coderunner
     " autocmd FileType c,cpp nnoremap <silent> <F9> :AsyncRun -mode=term -pos=right xmake build<CR>
     " autocmd FileType c,cpp nnoremap <silent> <F9> :AsyncRun -mode=term xmake build<CR>
     " autocmd FileType c,cpp nnoremap <silent> <leader>b :AsyncRun -mode=term -pos=right xmake build<CR>
-    autocmd FileType c,cpp nnoremap <silent> <leader>r :AsyncRun -mode=term -pos=right xmake run<cr>
+    " autocmd FileType c,cpp nnoremap <silent> <leader>r :AsyncRun -mode=term -pos=right xmake run<cr>
     " autocmd FileType c,cpp nnoremap <silent> <F5> :AsyncRun xmake -mode=term run<cr>
-    autocmd FileType c,cpp nnoremap <silent> <leader>k :AsyncRun xmake project -k compile_commands<cr>
+    " autocmd FileType c,cpp nnoremap <silent> <leader>k :AsyncRun xmake project -k compile_commands<cr>
 
-    " autocmd FileType rust nnoremap <F9> :Neomake rustc<CR>
-    " autocmd FileType rust nnoremap <F5> :RustRun<CR>
+    autocmd FileType rust nnoremap <F9> :Cargo build<CR>
+    autocmd FileType rust nnoremap <F5> :Cargo run<CR>
     " autocmd FileType rust nnoremap <leader>b :AsyncRun cargo build<CR>
     " autocmd FileType rust nnoremap <leader>r :AsyncRun cargo run<CR>
     "nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
     "nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 augroup END
-command! CompileCommands :AsyncRun xmake project -k compile_commands<cr>
+" command! CompileCommands :AsyncRun xmake project -k compile_commands<cr>
 "}}}
 
 "{{{ WebDevicons
@@ -888,33 +835,14 @@ let g:AutoPairsShortcutJump = ''
 "}}}
 
 " {{{ run xmake in the first terminal window
-command! XmakeInTerm silent! call RunXmakeInTerm()
-function! RunXmakeInTerm()
-    for buf in term_list()
-        let s:status = term_getstatus(buf)
-        if matchstr(s:status, "finished") != ""
-            return
-        elseif matchstr(s:status, "normal") != ""
-            "从终端作业模式不能进入插入模式。
-            call term_sendkeys(buf, "i")
-        endif
-        call term_sendkeys(buf, "xmake && xmake run\<CR>")
-        break
-    endfor
-endfunction
 "}}}
 
 " {{{ Key Mapping
 nnoremap s <Plug>(easymotion-s2)
 nnoremap t <Plug>(easymotion-t2)
 
-tnoremap <F1> <C-W>N
-tnoremap <ESC> <C-\><C-n>
-tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
-tnoremap <c-h> <C-\><C-N><C-w>h
-tnoremap <c-j> <C-\><C-N><C-w>j
-tnoremap <c-k> <C-\><C-N><C-w>k
-tnoremap <c-l> <C-\><C-N><C-w>l
+tnoremap <F1> <C-W>C
+tnoremap <C-Q> <C-W>C
 nnoremap j gj
 nnoremap k gk
 inoremap <F1> <ESC> " 防止F1误触
@@ -925,7 +853,7 @@ inoremap jj <ESC>
 nnoremap <M-t> :tabe<CR>
 nnoremap <M-o> :NERDTreeToggle<CR>
 nnoremap <M-q> :call QFWindowToggle()<CR> 
-nnoremap <M-l> :call LocWindowToggle()<cr>
+" nnoremap <M-l> :call LocWindowToggle()<cr>
 nnoremap <M-n> :tn<CR>
 nnoremap <M-p> :tp<CR>
 
@@ -943,8 +871,23 @@ cnoremap <C-k> <Home>
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
 nnoremap <leader>v <C-w>v<C-w>l
-" nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>t :tabnew<CR>
 nnoremap <Leader>w :w<CR>
 
 "}}}
@@ -994,9 +937,6 @@ function! s:vimtags()
 endfunction
 
 command! VimTags call s:vimtags()
-" nnoremap g] :VimTags<CR>
-nnoremap g] :Leaderf vimtag<CR>
-" tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 function! Get_digest(line, mode)
     return [a:line, 0]
     " full path, i.e, the whole line
@@ -1005,14 +945,19 @@ function! Get_digest(line, mode)
     let s:filename = s:templist[2]
     return [s:filename, len(a:line) - len(s:filename)]
 endfunction
-let g:Lf_Extensions.vimtag = {
+let g:Lf_Extensions = {
+            \ "vimtag": {
             \       "source": string(function("s:vimtags_sources"))[10:-3],
             \       "arguments": [{ "name": ["tag_pattern"], "nargs": '?' }],
             \       "accept": string(function("s:vimtags_sink"))[10:-3],
             \       "get_digest": "Get_digest",
+            \ },
             \}
 "}}}
-
+" nnoremap g] :VimTags<CR>
+nnoremap g] :Leaderf vimtag<CR>
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+"}}}
 " Alt keys stuff {{{
 function! Terminal_MetaMode(mode)
     set ttimeout
@@ -1059,44 +1004,46 @@ call Terminal_MetaMode(0)
 let &t_TI="" " disable modifyOtherKeys, use ESC mode to send alt keys.
 let &t_LE=""
 " }}}
-
-let gutentags_define_advanced_commands=1
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-
-" dirvish {{{
-augroup dirvish_config
-    autocmd!
-
-    " Map `t` to open in new tab.
-    autocmd FileType dirvish
-    \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-    \ |xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-
-    autocmd FileType dirvish nnoremap <buffer> m :!mkdir %|xnoremap <buffer> m :!mkdir %
-
-    autocmd FileType dirvish nnoremap <buffer> e :e %|xnoremap <buffer> e :e %
-    " Map `gr` to reload.
-    autocmd FileType dirvish nnoremap <silent><buffer>
-    \ gr :<C-U>Dirvish %<CR>
-
-    " Map `gh` to hide dot-prefixed files.  Press `R` to "toggle" (reload).
-    autocmd FileType dirvish nnoremap <silent><buffer>
-    \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>
-augroup END
-
-
 "
-" }}}
 
-" let g:vimspector_enable_mappings = 'HUMAN'
-let g:termdebugger="gdb-multiarch"
-
+let g:gutentags_define_advanced_commands = 1
 nnoremap <buffer> <c-q> :QuickpeekToggle<cr>
 let g:quickpeek_auto = v:true
+let g:ycm_language_server = 
+  \ [ 
+  \   {
+  \     'name': 'rust',
+  \     'cmdline': [ 'rust-analyzer' ],
+  \     'filetypes': [ 'rust' ],
+  \     'project_root_files': [ 'Cargo.toml' ]
+  \   }
+  \ ]
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
 
-" coc {{{
-" TextEdit might fail if hidden is not set.
-set hidden
+set clipboard+=unnamedplus
+set mouse=a
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
+endif
+nnoremap <Leader>a :Ack!<Space>
+let g:ycm_clangd_args=['--header-insertion=never']
+
+
+if !empty(findfile('.clang-format', ';'))
+	  setlocal formatprg=clang-format\ -style=file
+endif
+set formatprg=clang-format\ -style=file
+
+" {{{ coc.nvim
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -1107,7 +1054,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=100
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -1124,11 +1071,11 @@ endif
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -1136,18 +1083,19 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 " Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -1163,8 +1111,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
@@ -1172,11 +1122,13 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>fm  <Plug>(coc-format-selected)
-nmap <leader>fm  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+xmap gq  <Plug>(coc-format-selected)
+nmap gq  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -1187,9 +1139,29 @@ augroup mygroup
 augroup end
 
 
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 " Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
+" Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
@@ -1205,24 +1177,31 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Mappings using CoCList:
+" Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
+" nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" " Manage extensions.
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" " Show commands.
+" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" " Find symbol of current document.
+" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" " Search workspace symbols.
+" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" " Resume latest coc list.
+" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 " }}}
+"
+set path=.,**
+let g:asyncrun_open = 8
+noremap <silent><f5> :AsyncTask file-run<cr>
+noremap <silent><f9> :AsyncTask file-build<cr>
+let g:asynctasks_term_pos = 'tab'
+nnoremap <leader>p :CocList tasks<CR>
