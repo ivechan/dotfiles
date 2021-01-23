@@ -191,9 +191,9 @@ set shortmess+=T
 let python_highlight_all = 1
 
 " {{{AsyncRun
-let g:asyncrun_encs = 'gbk'
+" let g:asyncrun_encs = 'gbk'
 let g:asyncrun_open = 6 " set the quickfix window 6 lines height.
-let g:asyncrun_bell = 1 " ring the bell to notify you job finished
+" let g:asyncrun_bell = 1 " ring the bell to notify you job finished
 " toggles the quickfix window.
 let g:Quickfix_Win_Height=6
 command! -bang -nargs=? QFix call QFixToggle(<bang>0)
@@ -1203,5 +1203,7 @@ set path=.,**
 let g:asyncrun_open = 8
 noremap <silent><f5> :AsyncTask file-run<cr>
 noremap <silent><f9> :AsyncTask file-build<cr>
+inoremap <silent><f5> :AsyncTask file-run<cr>
+inoremap <silent><f9> :AsyncTask file-build<cr>
 let g:asynctasks_term_pos = 'tab'
 nnoremap <leader>p :CocList tasks<CR>
